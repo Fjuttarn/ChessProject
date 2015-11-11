@@ -6,3 +6,6 @@ C:\Users\NilsElveros\Documents\GitHub\ChessProject\Chess\Chess\obj\Debug\Chess.p
 C:\Users\Marcus\Documents\Skolan\C#\ChessProject\Chess\Chess\bin\Debug\Chess.exe.config
 C:\Users\Marcus\Documents\Skolan\C#\ChessProject\Chess\Chess\obj\Debug\Chess.exe
 C:\Users\Marcus\Documents\Skolan\C#\ChessProject\Chess\Chess\obj\Debug\Chess.pdb
+C:\Users\Marcus\Documents\Skolan\C#\ChessProject\Chess\Chess\bin\Debug\Chess.exe
+C:\Users\Marcus\Documents\Skolan\C#\ChessProject\Chess\Chess\bin\Debug\Chess.pdb
+C:\Users\Marcus\Documents\Skolan\C#\ChessProject\Chess\Chess\obj\Debug\Chess.csprojResolveAssemblyReference.cache

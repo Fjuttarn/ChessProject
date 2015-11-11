@@ -12,6 +12,8 @@ namespace Chess
         {
             System.Console.WriteLine("hej marcus, välkommen till chess!");
             System.Console.WriteLine("tack nils, kul att vara här!");
+            System.Console.WriteLine("Allid kul att ha dig här Marcus!");
+            System.Console.WriteLine("Testar igen!");
             Console.ReadKey();
         }
     }
