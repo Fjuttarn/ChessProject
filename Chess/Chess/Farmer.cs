@@ -10,6 +10,7 @@ namespace Chess
     {
         int positionX;
         int positionY;
+        bool isFirstMove = true;
         Player player;
 
         public Farmer(Player p, int posX, int posY) : base(p, posX, posY)
@@ -21,7 +22,52 @@ namespace Chess
 
         public override Boolean isValidMove(Move move)
         {
-            return true;
+            //Check if the move is valid for white pieces
+            if (player is HumanPlayer)
+            {
+                if (move.gettoY() - positionY == 2 && move.gettoX() == positionX && isFirstMove == true)
+                {
+                    this.isFirstMove = false;
+                    System.Console.WriteLine("Draget är tillåtet!");
+                    return true;
+                }
+
+                if (move.gettoY() - positionY == 1 && move.gettoX() - positionX == 1 ||
+                    move.gettoX() - positionX == -1 || move.gettoX() == positionX)
+                {
+                    if (isFirstMove == true)
+                    {
+                        this.isFirstMove = false;
+                    }
+                    System.Console.WriteLine("Draget är tillåtet!");
+                    return true;
+                }
+            }
+
+            //Check if the move is valid for black pieces
+            if (player is CPUPlayer)
+            {
+                if (move.gettoY() - positionY == -2 && move.gettoX() == positionX && isFirstMove == true)
+                {
+                    this.isFirstMove = false;
+                    System.Console.WriteLine("Draget är tillåtet!");
+                    return true;
+                }
+
+                if (move.gettoY() - positionY == -1 && move.gettoX() - positionX == 1 ||
+                    move.gettoX() - positionX == -1 || move.gettoX() == positionX)
+                {
+                    if (isFirstMove == true)
+                    {
+                        this.isFirstMove = false;
+                    }
+                    System.Console.WriteLine("Draget är tillåtet!");
+                    return true;
+                }
+            }
+
+            System.Console.WriteLine("Draget är inte tillåtet!");
+            return false;
         }
     }
 }
