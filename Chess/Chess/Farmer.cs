@@ -10,7 +10,6 @@ namespace Chess
     {
         int positionX;
         int positionY;
-        bool isFirstMove = true;
         Player player;
 
         public Farmer(Player p, int posX, int posY) : base(p, posX, posY)
@@ -25,9 +24,8 @@ namespace Chess
             //Check if the move is valid for white pieces
             if (player is HumanPlayer)
             {
-                if (move.gettoY() - positionY == 2 && move.gettoX() == positionX && isFirstMove == true)
+                if (move.gettoY() - positionY == 2 && move.gettoX() == positionX && positionY == 1)
                 {
-                    this.isFirstMove = false;
                     System.Console.WriteLine("Draget är tillåtet!");
                     return true;
                 }
@@ -35,10 +33,6 @@ namespace Chess
                 if (move.gettoY() - positionY == 1 && move.gettoX() - positionX == 1 ||
                     move.gettoX() - positionX == -1 || move.gettoX() == positionX)
                 {
-                    if (isFirstMove == true)
-                    {
-                        this.isFirstMove = false;
-                    }
                     System.Console.WriteLine("Draget är tillåtet!");
                     return true;
                 }
@@ -47,9 +41,8 @@ namespace Chess
             //Check if the move is valid for black pieces
             if (player is CPUPlayer)
             {
-                if (move.gettoY() - positionY == -2 && move.gettoX() == positionX && isFirstMove == true)
+                if (move.gettoY() - positionY == -2 && move.gettoX() == positionX && positionY == 6)
                 {
-                    this.isFirstMove = false;
                     System.Console.WriteLine("Draget är tillåtet!");
                     return true;
                 }
@@ -57,10 +50,6 @@ namespace Chess
                 if (move.gettoY() - positionY == -1 && move.gettoX() - positionX == 1 ||
                     move.gettoX() - positionX == -1 || move.gettoX() == positionX)
                 {
-                    if (isFirstMove == true)
-                    {
-                        this.isFirstMove = false;
-                    }
                     System.Console.WriteLine("Draget är tillåtet!");
                     return true;
                 }
