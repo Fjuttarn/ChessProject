@@ -83,23 +83,28 @@ namespace Chess
             board[7, 6] = blackFarmer8;
 
         }
-        public void makeMove(int fromX, int fromY, int toX, int toY)
+        //Updaterar den brädet (arrayen) efter att ett drag genomförts
+        public void updateTable(Move move)
         {
-            Move move = new Move(fromX, fromY, toX, toY);
-            if(board[fromX, fromY].isValidMove(move) == true)
+            board[move.gettoX(), move.gettoY()] = board[move.getfromX(), move.getfromY()];
+            board[move.getfromX(), move.getfromY()] = null;
+        }
+
+        //Kollar om det är ett tillåtet drag
+        public bool isValid(Move move)
+        {
+            if (board[move.getfromX(), move.getfromY()].isValidMove(move) == false)
             {
-                System.Console.WriteLine("pjäsen på pos " + fromX + "," + fromY + " flyttar på sig");
-                board[toX, toY] = board[fromX, fromY];
-                board[fromX, fromY] = null;
-                System.Console.WriteLine("den står nu på plats: " + toX + "," + toY);
- 
-                if (board[fromX, fromY] == null)
-                {
-                    System.Console.WriteLine("detta skrivs om den gamla platsen är null");
-                    
-                }
-               
+                return false;
             }
+            else
+            {
+                return true;
+            }
+
+
         }
     }
+
 }
+
