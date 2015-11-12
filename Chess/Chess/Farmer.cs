@@ -21,14 +21,15 @@ namespace Chess
             {
                 System.Console.WriteLine("position x:" + positionX);
                 System.Console.WriteLine("position y: " + positionY);
-                if (move.gettoY() - positionY == 2 && move.gettoX() == positionX && positionY == 1)
+                if (move.gettoY() - move.getfromY() == 2 && move.gettoX() == move.getfromX() 
+                    && move.getfromY() == 1)
                 {
                     System.Console.WriteLine("1Draget är tillåtet!");
                     return true;
                 }
 
-                if (move.gettoY() - positionY == 1 && (move.gettoX() - positionX == 1 ||
-                    move.gettoX() - positionX == -1 || move.gettoX() == positionX))
+                if (move.gettoY() - move.getfromY() == 1 && (move.gettoX() - move.getfromX() == 1 ||
+                    move.gettoX() - move.getfromX() == -1 || move.gettoX() == move.getfromX()))
                 {
                     System.Console.WriteLine("2Draget är tillåtet!");
                     return true;
@@ -38,14 +39,15 @@ namespace Chess
             //Check if the move is valid for black pieces
             if (player is CPUPlayer)
             {
-                if (move.gettoY() - positionY == -2 && move.gettoX() == positionX && positionY == 6)
+                if (move.gettoY() - move.getfromY() == -2 && move.gettoX() == move.getfromX() 
+                    && move.getfromY() == 6)
                 {
                     System.Console.WriteLine("Draget är tillåtet!");
                     return true;
                 }
 
-                if (move.gettoY() - positionY == -1 && move.gettoX() - positionX == 1 ||
-                    move.gettoX() - positionX == -1 || move.gettoX() == positionX)
+                if (move.gettoY() - move.getfromY() == -1 && move.gettoX() - move.getfromX() == 1 ||
+                    move.gettoX() - move.getfromX() == -1 || move.gettoX() == move.getfromX())
                 {
                     System.Console.WriteLine("Draget är tillåtet!");
                     return true;

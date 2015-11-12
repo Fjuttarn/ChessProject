@@ -16,7 +16,21 @@ namespace Chess
 
         public override Boolean isValidMove(Move move)
         {
-            return true;
+            if (move.gettoX() - move.getfromX() == move.gettoY() - move.getfromY())
+            {
+                return true;
+            }
+            else if (move.gettoX() + move.getfromX() == move.gettoY() + move.getfromY())
+            {
+                return true;
+            }
+            else if (move.gettoY() == move.getfromY() || move.gettoX() == move.getfromX())
+            {
+                System.Console.WriteLine("draget är tillåtet");
+                return true;
+            }
+
+            return false;
         }
     }
 }
