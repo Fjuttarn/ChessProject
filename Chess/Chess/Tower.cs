@@ -18,9 +18,19 @@ namespace Chess
             positionX = posX;
             positionY = posY;
         }
+
         public override Boolean isValidMove(Move move)
         {
-            return true;
+            if(move.gettoY() == positionY || move.gettoX() == positionX)
+            {
+                System.Console.WriteLine("draget är tillåtet");
+                return true;
+            }
+            else
+            {
+                System.Console.WriteLine("draget är inte tillåtet");
+                return false;
+            }
         }
     }
 }
