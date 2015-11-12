@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace Chess
 {
-    class ChessPiece
+    abstract class ChessPiece
     {
-        int positionX;
-        int positionY;
-        Player player;
-        public ChessPiece(Player p, int posX, int posY)
+        protected int positionX;
+        protected int positionY;
+        protected Player player;
+
+        protected ChessPiece(Player p, int posX, int posY)
         {
-            player = p;
             positionX = posX;
             positionY = posY;
+            player = p;
         }
 
         public int posX
@@ -29,7 +30,6 @@ namespace Chess
                 positionX = value;
             }
         }
-
         public int posY
         {
             get
@@ -42,9 +42,6 @@ namespace Chess
             }
         }
 
-        public virtual Boolean isValidMove(Move move)
-        {
-            return true;
-        }
+        public abstract Boolean isValidMove(Move move);
     }
 }

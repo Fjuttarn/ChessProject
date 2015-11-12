@@ -8,16 +8,11 @@ namespace Chess
 {
     class King : ChessPiece
     {
-        int positionX;
-        int positionY;
-        Player player;
-
         public King(Player p, int posX, int posY) : base(p, posX, posY)
         {
-            player = p;
-            positionX = posX;
-            positionY = posY;
         }
+
+     
 
         public override Boolean isValidMove(Move move)
         {

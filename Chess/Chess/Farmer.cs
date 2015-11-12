@@ -8,32 +8,29 @@ namespace Chess
 {
     class Farmer : ChessPiece
     {
-        int positionX;
-        int positionY;
-        Player player;
-
         public Farmer(Player p, int posX, int posY) : base(p, posX, posY)
         {
-            player = p;
-            positionX = posX;
-            positionY = posY;
         }
+
+  
 
         public override Boolean isValidMove(Move move)
         {
             //Check if the move is valid for white pieces
             if (player is HumanPlayer)
             {
+                System.Console.WriteLine("position x:" + positionX);
+                System.Console.WriteLine("position y: " + positionY);
                 if (move.gettoY() - positionY == 2 && move.gettoX() == positionX && positionY == 1)
                 {
-                    System.Console.WriteLine("Draget är tillåtet!");
+                    System.Console.WriteLine("1Draget är tillåtet!");
                     return true;
                 }
 
-                if (move.gettoY() - positionY == 1 && move.gettoX() - positionX == 1 ||
-                    move.gettoX() - positionX == -1 || move.gettoX() == positionX)
+                if (move.gettoY() - positionY == 1 && (move.gettoX() - positionX == 1 ||
+                    move.gettoX() - positionX == -1 || move.gettoX() == positionX))
                 {
-                    System.Console.WriteLine("Draget är tillåtet!");
+                    System.Console.WriteLine("2Draget är tillåtet!");
                     return true;
                 }
             }

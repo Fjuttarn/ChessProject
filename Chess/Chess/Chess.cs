@@ -16,10 +16,10 @@ namespace Chess
             System.Console.WriteLine("Testar igen!");
             
             GameView gw = new GameView();
-            gw.makeMove(1, 1, 1, 3);
-            gw.makeMove(1, 3, 1, 5);
-            gw.makeMove(1, 3, 1, 4);
-            gw.makeMove(0, 0, 3, 1);
+            gw.makeMove(1, 1, 1, 3); //får hända
+            gw.makeMove(1, 3, 1, 5); //får inte hända
+            gw.makeMove(1, 3, 1, 4); //får hända
+            gw.makeMove(0, 0, 3, 1); //får inte hända
 
 
 

@@ -88,6 +88,9 @@ namespace Chess
         {
             board[move.gettoX(), move.gettoY()] = board[move.getfromX(), move.getfromY()];
             board[move.getfromX(), move.getfromY()] = null;
+            board[move.gettoX(), move.gettoY()].posX = move.gettoX();
+            board[move.gettoX(), move.gettoY()].posY = move.gettoY();
+
         }
 
         //Kollar om det är ett tillåtet drag
