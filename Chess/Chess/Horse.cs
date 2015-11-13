@@ -12,7 +12,24 @@ namespace Chess
 
         public override Boolean isValidMove(Move move)
         {
-            return true;
+            if(move.getfromY() - move.gettoY() == 2 || move.getfromY() - move.gettoY() == -2)
+            {
+                if(move.getfromX() - move.gettoX() == 1 || move.getfromX() - move.gettoX() == -1)
+                {
+                    System.Console.WriteLine("1Draget är tillåtet!");
+                    return true;
+                }
+            }
+            if (move.getfromX() - move.gettoX() == 2 || move.getfromX() - move.gettoX() == -2)
+            {
+                if (move.getfromY() - move.gettoY() == 1 || move.getfromY() - move.gettoY() == -1)
+                {
+                    System.Console.WriteLine("2Draget är tillåtet!");
+                    return true;
+                }
+            }
+            System.Console.WriteLine("Draget är inte tillåtet!");
+            return false;
         }
     }
 }

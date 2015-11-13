@@ -15,23 +15,23 @@ namespace Chess
             if (move.gettoY() - move.getfromY() == 1 && (move.gettoX() - move.getfromX() == 1 ||
                   move.gettoX() - move.getfromX() == -1 || move.gettoX() == move.getfromX()))
             {
-                System.Console.WriteLine("2Draget är tillåtet!");
+                System.Console.WriteLine("1Draget är tillåtet!");
                 return true;
             }
-            else if (move.gettoY() - move.getfromY() == -1 && move.gettoX() - move.getfromX() == 1 ||
-                 move.gettoX() - move.getfromX() == -1 || move.gettoX() == move.getfromX())
+            else if (move.gettoY() - move.getfromY() == -1 && (move.gettoX() - move.getfromX() == 1 ||
+                 move.gettoX() - move.getfromX() == -1 || move.gettoX() == move.getfromX()))
             {
-                System.Console.WriteLine("Draget är tillåtet!");
+                System.Console.WriteLine("2Draget är tillåtet!");
                 return true;
             }
             else if (move.gettoX() - move.getfromX() == 1 || move.gettoX() - move.getfromX() == -1)
             {
-                System.Console.WriteLine("Draget är tillåtet!");
+                System.Console.WriteLine("3Draget är tillåtet!");
                 return true;
             }
             else
             {
-                System.Console.WriteLine("Draget är inte tillåtet!");
+                System.Console.WriteLine("4Draget är inte tillåtet!");
                 return false;
             }
         }
