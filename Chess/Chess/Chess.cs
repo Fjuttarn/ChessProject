@@ -20,6 +20,8 @@ namespace Chess
             gw.makeMove(1, 3, 1, 5); //får inte hända
             gw.makeMove(1, 3, 1, 4); //får hända
             gw.makeMove(0, 0, 3, 1); //får inte hända
+            gw.makeMove(3, 0, 3, 2);//kungen får hända
+            
 
 
 

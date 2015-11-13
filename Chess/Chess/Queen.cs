@@ -8,11 +8,7 @@ namespace Chess
 {
     class Queen : ChessPiece
     {
-        public Queen(Player p, int posX, int posY) : base(p, posX, posY)
-        {
-        }
-
- 
+        public Queen(Player p, int posX, int posY) : base(p, posX, posY) {}
 
         public override Boolean isValidMove(Move move)
         {

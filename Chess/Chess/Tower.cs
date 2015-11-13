@@ -8,15 +8,11 @@ namespace Chess
 {
     class Tower : ChessPiece
     {
-        public Tower(Player p, int posX, int posY) : base(p, posX, posY)
-        {
-        }
-
-     
-
+        public Tower(Player p, int posX, int posY) : base(p, posX, posY) {}
+   
         public override Boolean isValidMove(Move move)
         {
-            if(move.gettoY() == positionY || move.gettoX() == positionX)
+            if(move.gettoY() == move.getfromY() || move.gettoX() == move.getfromX())
             {
                 System.Console.WriteLine("draget är tillåtet");
                 return true;

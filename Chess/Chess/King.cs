@@ -8,15 +8,32 @@ namespace Chess
 {
     class King : ChessPiece
     {
-        public King(Player p, int posX, int posY) : base(p, posX, posY)
-        {
-        }
-
-     
+        public King(Player p, int posX, int posY) : base(p, posX, posY) { }
 
         public override Boolean isValidMove(Move move)
         {
-            return true;
+            if (move.gettoY() - move.getfromY() == 1 && (move.gettoX() - move.getfromX() == 1 ||
+                  move.gettoX() - move.getfromX() == -1 || move.gettoX() == move.getfromX()))
+            {
+                System.Console.WriteLine("2Draget är tillåtet!");
+                return true;
+            }
+            else if (move.gettoY() - move.getfromY() == -1 && move.gettoX() - move.getfromX() == 1 ||
+                 move.gettoX() - move.getfromX() == -1 || move.gettoX() == move.getfromX())
+            {
+                System.Console.WriteLine("Draget är tillåtet!");
+                return true;
+            }
+            else if (move.gettoX() - move.getfromX() == 1 || move.gettoX() - move.getfromX() == -1)
+            {
+                System.Console.WriteLine("Draget är tillåtet!");
+                return true;
+            }
+            else
+            {
+                System.Console.WriteLine("Draget är inte tillåtet!");
+                return false;
+            }
         }
     }
 }
