@@ -128,7 +128,81 @@ namespace Chess
 
             return 3;
         }
-    }
+        public bool isLeagalMove(Move move)
+        {//1 egen pjäs, 2 enemy pjäs, 3 tom ruta
+            ChessPiece current = board[move.getfromX(), move.getfromY()];
+            if (current is Horse)
+            {
+                if (squareStatus(move) == 1)//En av spelarens egna pjäser står i vägen
+                {
+                    return false;
+                }
+                return true;
+            }
+            if (current is Farmer)
+            {
+                if ((move.getfromX() != move.gettoX() && squareStatus(move) == 2) || (move.gettoX() == move.getfromX() && squareStatus(move) == 3))
+                //bonden har tagit en enemy på sidan eller gått rak fram och inte träffat på ngn pjäs
+                {
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                if (move.isHorizontal() == true)
+                {
+                    return checkHorizontal(move);
+                }
+                if (move.isVertical() == true)
+                {
+                    return checkVertical(move);
+                }
+                if (move.isDiagonal() == true)
+                {
+                    return checkDiagonal(move);
+                }
+                return false;
+            }
+        }
 
+        public bool checkDiagonal(Move move)
+        {
+            int y = move.getfromY();
+            for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
+            {
+                y++;
+                if (board[x, y] != null)
+                {
+                    if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
+                    {
+                        if (squareStatus(move) == 1)//En av spelarens egna pjäser står i vägen
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+
+
+            }
+            return false;
+        }
+        public bool checkVertical(Move move)
+        {
+            return true;
+        }
+
+        public bool checkHorizontal(Move move)
+        {
+            return true;
+        }
+    }
 }
+
+
+  
+
+
+
 
