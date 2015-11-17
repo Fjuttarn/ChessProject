@@ -96,13 +96,13 @@ namespace Chess
         //Kollar om det är ett tillåtet drag
         public bool isValid(Move move)
         {
-            if (board[move.getfromX(), move.getfromY()].isValidMove(move) == false)
+            if (board[move.getfromX(), move.getfromY()].isValidMove(move) && isLeagalMove(move))
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
 
@@ -169,25 +169,89 @@ namespace Chess
         public bool checkDiagonal(Move move)
         {
             int y = move.getfromY();
-            for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
+            if (move.getfromX() < move.gettoX() && move.getfromY() < move.gettoY()) //x och y ökar
             {
-                y++;
-                if (board[x, y] != null)
+
+                for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
-                    if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
+                    y++;
+                    if (board[x, y] != null) //om någon pjäs står i vägen
                     {
-                        if (squareStatus(move) == 1)//En av spelarens egna pjäser står i vägen
+                        if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
                         {
-                            return false;
+                            if (squareStatus(move) == 2)//Pjäsen har eliminerat en motståndare
+                            {
+                                return true;
+                            }
                         }
+                        return false;
                     }
-                    return true;
                 }
+                return true;
+            }
 
+            if (move.getfromX() > move.gettoX() && move.getfromY() > move.gettoY()) //x och y minskar
+            {
+                for (int x = move.getfromX() - 1; x <= move.gettoX(); x--)
+                {
+                    y--;
+                    if (board[x, y] != null)//om någon pjäs står i vägen
+                    {
+                        if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
+                        {
+                            if (squareStatus(move) == 2)//Pjäsen har eliminerat en motståndare
+                            {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                }
+                return true;
+            }
 
+            if (move.getfromX() < move.gettoX() && move.getfromY() > move.gettoY()) //x ökar, y minskar
+            {
+                for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
+                {
+                    y--;
+                    if (board[x, y] != null)//om någon pjäs står i vägen
+                    {
+                        if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
+                        {
+                            if (squareStatus(move) == 2)//Pjäsen har eliminerat en motståndare
+                            {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            if (move.getfromX() > move.gettoX() && move.getfromY() < move.gettoY()) //x minskar, y ökar
+            {
+                for (int x = move.getfromX() - 1; x <= move.gettoX(); x--)
+                {
+                    y++;
+                    if (board[x, y] != null)//om någon pjäs står i vägen
+                    {
+                        if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
+                        {
+                            if (squareStatus(move) == 2)//Pjäsen har eliminerat en motståndare
+                            {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                }
+                return true;
             }
             return false;
         }
+
         public bool checkVertical(Move move)
         {
             return true;
@@ -201,7 +265,7 @@ namespace Chess
 }
 
 
-  
+
 
 
 

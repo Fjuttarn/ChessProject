@@ -23,9 +23,7 @@ namespace Chess
             gw.makeMove(3, 0, 5, 0);//kungen får hända
             //gw.makeMove(1, 0, 0, 2);//häst får inte hända
             //gw.makeMove(0, 2, 1, 0);
-
-
-
+            
             Console.ReadKey();
         }
     }
