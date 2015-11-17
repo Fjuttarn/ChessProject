@@ -42,6 +42,14 @@ namespace Chess
             }
         }
 
+        public Player getPlayer
+        {
+            get
+            {
+                return player;
+            }
+        }
+
         public abstract Boolean isValidMove(Move move);
     }
 }

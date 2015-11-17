@@ -104,8 +104,29 @@ namespace Chess
             {
                 return true;
             }
+        }
 
+        //1. Egen pjäs
+        //2. Motståndares pjäs
+        //3. Tom ruta
+        public int squareStatus(Move move)
+        {
+            if (board[move.gettoX(), move.gettoY()] != null)
+            {
+                ChessPiece p1 = board[move.getfromX(), move.getfromY()];
+                ChessPiece p2 = board[move.gettoX(), move.gettoY()];
 
+                if (p1.getPlayer == p2.getPlayer)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+
+            return 3;
         }
     }
 

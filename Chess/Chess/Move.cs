@@ -36,5 +36,35 @@ namespace Chess
         {
             return toY;
         }
+
+        public bool isHorizontal()
+        {
+            if(fromY == toY)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool isVertical()
+        {
+            if(fromX == toX)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool isDiagonal()
+        {
+            if(fromX != toX && fromY != toY)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
