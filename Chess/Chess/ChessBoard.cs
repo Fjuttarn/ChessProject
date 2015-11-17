@@ -254,15 +254,74 @@ namespace Chess
 
         public bool checkVertical(Move move)
         {
-            return true;
+            if (move.getfromY() < move.gettoY())
+            {
+                for (int y = move.getfromY() + 1; y <= move.gettoY(); y++)
+                {
+                    if (board[move.getfromX(), y] != null)
+                    {
+                        if (y == move.gettoY() && squareStatus(move) == 1)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            else if (move.getfromY() > move.gettoY())
+            {
+                for (int y = move.getfromY() - 1; y <= move.gettoY(); y--)
+                {
+                    if (board[move.getfromX(), y] != null)
+                    {
+                        if (y == move.gettoY() && squareStatus(move) == 1)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            return false;
         }
 
         public bool checkHorizontal(Move move)
         {
-            return true;
+            if (move.getfromX() < move.gettoX())
+            {
+                for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
+                {
+                    if (board[x, move.getfromY()] != null)
+                    {
+                        if (x == move.gettoX() && squareStatus(move) == 1)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            if (move.getfromX() > move.gettoX())
+            {
+                for (int x = move.getfromX() - 1; x <= move.gettoX(); x--)
+                {
+                    if (board[x, move.getfromY()] != null)
+                    {
+                        if (x == move.gettoX() && squareStatus(move) == 1)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            return false;
         }
     }
 }
+
 
 
 
