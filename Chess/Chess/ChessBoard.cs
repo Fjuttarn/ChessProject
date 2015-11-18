@@ -322,6 +322,33 @@ namespace Chess
             }
             return false;
         }
+
+        //kollar om kungen står i check
+        public bool isCheck(int kingX, int kingY, Player p)
+        {
+            for (int x = 0; x < board.GetLength(0); x++)
+            {
+                for (int y = 0; y < board.GetLength(1); y++)
+                {
+                    if (board[x, y] != null)
+                    {
+                        ChessPiece temp = board[x, y];
+                        if(temp.getPlayer != p)
+                        {
+                            Move move = new Move(x, y, kingX, kingY);//move som går till motståndarens kung position
+                            if (isValid(move))
+                            {
+                                return true;
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+            return false;
+        }
     }
 }
 
