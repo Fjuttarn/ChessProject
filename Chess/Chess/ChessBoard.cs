@@ -275,10 +275,11 @@ namespace Chess
                 {
                     if (board[move.getfromX(), y] != null)
                     {
-                        if (y == move.gettoY() && squareStatus(move) == 1)
+                        if (y == move.gettoY() && squareStatus(move) == 2)
                         {
-                            return false;
+                            return true;
                         }
+                        return false;
                     }
                 }
                 return true;
@@ -292,12 +293,13 @@ namespace Chess
             {
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
-                    if (board[x, move.getfromY()] != null)
+                    if (board[x, move.getfromX()] != null)
                     {
-                        if (x == move.gettoX() && squareStatus(move) == 1)
+                        if (x == move.gettoX() && squareStatus(move) == 2)
                         {
-                            return false;
+                            return true;
                         }
+                        return false;
                     }
                 }
                 return true;
@@ -313,6 +315,7 @@ namespace Chess
                         {
                             return false;
                         }
+                        return false;
                     }
                 }
                 return true;
