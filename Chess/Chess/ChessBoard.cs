@@ -349,6 +349,24 @@ namespace Chess
             }
             return false;
         }
+
+        public bool isCheckMate(King king)
+        {
+            int posX = king.posX;
+            int posY = king.posY;
+            for (int x = 0; x < board.GetLength(0); x++)
+            {
+                for (int y = 0; y < board.GetLength(1); y++)
+                {
+                    Move move = new Move(posX, posY, x, y);
+                    if (isValid(move) && !isCheck(x, y, king.getPlayer))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }
 
