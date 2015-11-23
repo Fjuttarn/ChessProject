@@ -365,6 +365,7 @@ namespace Chess
                     }
                 }
             }
+            System.Console.WriteLine("DET BLEV SCHACK MATT!!");
             return true;
         }
     }
