@@ -121,4 +121,4 @@ namespace Chess
         }
 
     }
-}
+}//att göra: calla på isCheckMate() på bra ställe, fixa så att spelet skiftar mellan p1 och p2, fixa så att p1 inte kan röra p2s pjäser och viseversa.
