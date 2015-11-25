@@ -16,16 +16,20 @@ namespace Chess
         }
 
         //Kollar om det är ett tillåtet drag
-        public bool isValid(Move move)
+        public bool isValid(Move move, String gameStatus)
         {
-            if (board.get()[move.getfromX(), move.getfromY()].isValidMove(move) && isLeagalMove(move))
+            if (board.colourOfPiece(move) == gameStatus)
             {
-                return true;
+                if (board.get()[move.getfromX(), move.getfromY()].isValidMove(move) && isLeagalMove(move))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public bool isLeagalMove(Move move)
@@ -236,7 +240,7 @@ namespace Chess
                         if (temp.getPlayer != p)
                         {
                             Move move = new Move(x, y, kingX, kingY);//move som går till motståndarens kung position
-                            if (isValid(move))
+                            if (isValid(move, board.colourOfPiece(move)))
                             {
                                 return true;
                             }
@@ -259,7 +263,7 @@ namespace Chess
                 for (int y = 0; y < board.get().GetLength(1); y++)
                 {
                     Move move = new Move(posX, posY, x, y);
-                    if (isValid(move) && !isCheck(x, y, king.getPlayer))
+                    if (isValid(move, board.colourOfPiece(move)) && !isCheck(x, y, king.getPlayer))
                     {
                         return false;
                     }

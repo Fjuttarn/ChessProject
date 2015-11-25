@@ -8,11 +8,13 @@ namespace Chess
 {
     class ChessBoard
     {
-        ChessPiece[,] board = new ChessPiece[8, 8];
+        private ChessPiece[,] board = new ChessPiece[8, 8];
+        private ChessPiece whiteKing;
+        private ChessPiece blackKing;
         public ChessBoard(Player p1, Player p2)
         {
             //all white pieces
-            ChessPiece whiteKing = new King(p1, 3, 0);
+            whiteKing = new King(p1, 3, 0);
             ChessPiece whiteQueen = new Queen(p1, 4, 0);
             ChessPiece whiteRunner1 = new Runner(p1, 2, 0);
             ChessPiece whiteRunner2 = new Runner(p1, 5, 0);
@@ -30,7 +32,7 @@ namespace Chess
             ChessPiece whiteFarmer8 = new Farmer(p1, 7, 1);
 
             //all black pieces
-            ChessPiece blackKing = new King(p2, 4, 7);
+            blackKing = new King(p2, 4, 7);
             ChessPiece blackQueen = new Queen(p2, 3, 7);
             ChessPiece blackRunner1 = new Runner(p2, 2, 7);
             ChessPiece blackRunner2 = new Runner(p2, 5, 7);
@@ -87,6 +89,16 @@ namespace Chess
         {
             return board;
         }
+
+        public King getWhiteKing()
+        {
+            return (King)whiteKing;
+        }
+
+        public King getBlackKing()
+        {
+            return (King)blackKing;
+        }
         //Updaterar den brädet (arrayen) efter att ett drag genomförts
         public void updateTable(Move move)
         {
@@ -120,5 +132,14 @@ namespace Chess
             return 3;
         }
 
+        public string colourOfPiece(Move move)
+        {
+            return board[move.getfromX(), move.getfromY()].getPlayer.getColour;
+        }
+
     }
-}//att göra: calla på isCheckMate() på bra ställe, fixa så att spelet skiftar mellan p1 och p2, fixa så att p1 inte kan röra p2s pjäser och viseversa.
+}
+/*
+-   att göra: calla på isCheckMate() på bra ställe, 
+-   fixa så att spelet skiftar mellan p1 och p2, 
+-   fixa så att p1 inte kan röra p2s pjäser och viseversa.*/

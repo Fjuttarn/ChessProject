@@ -8,5 +8,14 @@ namespace Chess
 {
     class HumanPlayer : Player
     {
+        public HumanPlayer(String colour) : base(colour) { }
+
+      /*  public String getCoulur
+        {
+            get
+            {
+                return base.getColour;
+            }
+        }*/
     }
 }

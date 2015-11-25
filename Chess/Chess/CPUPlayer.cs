@@ -8,5 +8,14 @@ namespace Chess
 {
     class CPUPlayer : Player
     {
+        public CPUPlayer(String colour) : base(colour) { }
+
+      /*  public String getCoulur
+        {
+            get
+            {
+                return base.c;
+            }
+        }*/
     }
 }
