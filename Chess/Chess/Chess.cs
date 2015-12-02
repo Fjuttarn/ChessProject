@@ -19,7 +19,8 @@ namespace Chess
             GameView gw = new GameView();
             //gw.run();
 
-            gw.makeMove(5, 1, 5, 3);
+            gw.makeMove(1, 1, 1, 3);
+            gw.makeMove(2, 1, 1, 2);
 
             /*gw.makeMove(1, 1, 1, 3); //får hända
             gw.makeMove(1, 3, 1, 5); //får inte hända

@@ -14,12 +14,12 @@ namespace Chess
         {
             if(move.gettoY() == move.getfromY() || move.gettoX() == move.getfromX())
             {
-                System.Console.WriteLine("draget är tillåtet");
+                System.Console.WriteLine("tower draget är tillåtet");
                 return true;
             }
             else
             {
-                System.Console.WriteLine("draget är inte tillåtet");
+                System.Console.WriteLine("tower draget är inte tillåtet");
                 return false;
             }
         }

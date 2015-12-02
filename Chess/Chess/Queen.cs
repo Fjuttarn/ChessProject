@@ -22,7 +22,7 @@ namespace Chess
             }
             else if (move.gettoY() == move.getfromY() || move.gettoX() == move.getfromX())
             {
-                System.Console.WriteLine("draget är tillåtet");
+                System.Console.WriteLine("queen draget är tillåtet");
                 return true;
             }
 

@@ -20,14 +20,15 @@ namespace Chess
                 if (move.gettoY() - move.getfromY() == 2 && move.gettoX() == move.getfromX() 
                     && move.getfromY() == 1)
                 {
-                    System.Console.WriteLine("Draget är tillåtet!");
+                    System.Console.WriteLine(" bondeHUMAN Draget är tillåtet!");
                     return true;
                 }
 
                 if (move.gettoY() - move.getfromY() == 1 && (move.gettoX() - move.getfromX() == 1 ||
-                    move.gettoX() - move.getfromX() == -1 || move.gettoX() == move.getfromX()))
+                    (move.gettoX() - move.getfromX() == 1 && move.gettoY() - move.getfromY() == 1) ||
+                    (move.gettoX() == move.getfromX() && move.gettoY() - move.getfromY() == 1)))
                 {
-                    System.Console.WriteLine("Draget är tillåtet!");
+                    System.Console.WriteLine(" bondeHUMAN Draget är tillåtet!");
                     return true;
                 }
             }
@@ -38,19 +39,20 @@ namespace Chess
                 if (move.gettoY() - move.getfromY() == -2 && move.gettoX() == move.getfromX() 
                     && move.getfromY() == 6)
                 {
-                    System.Console.WriteLine("Draget är tillåtet!");
+                    System.Console.WriteLine("1bondeCPU Draget är tillåtet!");
                     return true;
                 }
 
-                if (move.gettoY() - move.getfromY() == -1 && move.gettoX() - move.getfromX() == 1 ||
-                    move.gettoX() - move.getfromX() == -1 || move.gettoX() == move.getfromX())
+                if ((move.gettoY() - move.getfromY() == -1 && move.gettoX() - move.getfromX() == 1) ||
+                    (move.gettoX() - move.getfromX() == -1 && (move.gettoY() - move.getfromY() == -1) ||
+                    (move.gettoX() == move.getfromX() && move.gettoY() - move.getfromY() == -1)))
                 {
-                    System.Console.WriteLine("Draget är tillåtet!");
+                    System.Console.WriteLine("2bondeCPU Draget är tillåtet!");
                     return true;
                 }
             }
 
-            System.Console.WriteLine("Draget är inte tillåtet!");
+            System.Console.WriteLine("3bondeCPU Draget är inte tillåtet!");
             return false;
         }
     }

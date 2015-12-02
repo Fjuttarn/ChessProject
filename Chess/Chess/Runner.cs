@@ -14,12 +14,18 @@ namespace Chess
         {
             if(move.gettoX() - move.getfromX() == move.gettoY() - move.getfromY())
             {
+
+                System.Console.WriteLine("Springare draget är tillåtet");
                 return true;
             }
             else if(move.gettoX() + move.getfromX() == move.gettoY() + move.getfromY())
             {
+
+                System.Console.WriteLine("Springare draget är tillåtet");
                 return true;
             }
+
+            System.Console.WriteLine("springare draget är inte tillåtet");
             return false;
         }
     }

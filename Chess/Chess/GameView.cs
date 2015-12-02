@@ -76,16 +76,22 @@ namespace Chess
                 //gui.updateBoard();
                 board.updateTable(move);
                 switchTurn();
-                System.Console.WriteLine(gamestatus + " turn.");
+                System.Console.WriteLine(gamestatus + " turn!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.");
             }
 
-            if (rules.isCheckMate(board.getWhiteKing()))
+            if (rules.isCheck(board.getWhiteKing()))
             {
-                gamestatus = "Black wins!";
+                if (rules.isCheckMate(board.getWhiteKing()))
+                {
+                    gamestatus = "Black wins!";
+                }
             }
-            else if (rules.isCheckMate(board.getBlackKing()))
+            else if (rules.isCheck(board.getBlackKing()))
             {
-                gamestatus = "White wins!";
+                if (rules.isCheckMate(board.getBlackKing()))
+                {
+                    gamestatus = "White wins!";
+                }
             }
         }
 

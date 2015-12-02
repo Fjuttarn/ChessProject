@@ -16,7 +16,7 @@ namespace Chess
             {
                 if(move.getfromX() - move.gettoX() == 1 || move.getfromX() - move.gettoX() == -1)
                 {
-                    System.Console.WriteLine("1Draget är tillåtet!");
+                    System.Console.WriteLine("häst Draget är tillåtet!");
                     return true;
                 }
             }
@@ -24,11 +24,11 @@ namespace Chess
             {
                 if (move.getfromY() - move.gettoY() == 1 || move.getfromY() - move.gettoY() == -1)
                 {
-                    System.Console.WriteLine("2Draget är tillåtet!");
+                    System.Console.WriteLine("häst Draget är tillåtet!");
                     return true;
                 }
             }
-            System.Console.WriteLine("Draget är inte tillåtet!");
+            System.Console.WriteLine("häst Draget är inte tillåtet!");
             return false;
         }
     }

@@ -156,36 +156,45 @@ namespace Chess
             return false;
         }
 
+        //1=egen pjäs
+        //2=motståndare
+        //3=tom ruta
         public bool checkVertical(Move move)
-        {
+        {//kolla om det går att hoppa över skaer''
             if (move.getfromY() < move.gettoY())
             {
                 for (int y = move.getfromY() + 1; y <= move.gettoY(); y++)
                 {
                     if (board.get()[move.getfromX(), y] != null)
                     {
-                        if (y == move.gettoY() && board.squareStatus(move) == 1)
+                        if (y == move.gettoY() && board.squareStatus(move) != 1)
                         {
-                            return false;
+                            System.Console.WriteLine("verticalt tillåtet 1");
+                            return true;
                         }
+                        return false;
                     }
+
                 }
                 return true;
             }
 
             else if (move.getfromY() > move.gettoY())
             {
-                for (int y = move.getfromY() - 1; y <= move.gettoY(); y--)
+                for (int y = move.getfromY() - 1; y >= move.gettoY(); y--)
                 {
                     if (board.get()[move.getfromX(), y] != null)
                     {
-                        if (y == move.gettoY() && board.squareStatus(move) == 2)
+                        if (y == move.gettoY() && (board.squareStatus(move) != 1))
                         {
+                            System.Console.WriteLine("verticalt tillåtet 2");
                             return true;
                         }
+                        System.Console.WriteLine("returnerar falskt 3");
                         return false;
                     }
                 }
+                System.Console.WriteLine("verticalt tillåtet 3");
                 return true;
             }
             return false;
@@ -199,7 +208,7 @@ namespace Chess
                 {
                     if (board.get()[x, move.getfromX()] != null)
                     {
-                        if (x == move.gettoX() && board.squareStatus(move) == 2)
+                        if (x == move.gettoX() && board.squareStatus(move) != 1)
                         {
                             return true;
                         }
@@ -211,13 +220,13 @@ namespace Chess
 
             if (move.getfromX() > move.gettoX())
             {
-                for (int x = move.getfromX() - 1; x <= move.gettoX(); x--)
+                for (int x = move.getfromX() - 1; x >= move.gettoX(); x--)
                 {
                     if (board.get()[x, move.getfromY()] != null)
                     {
-                        if (x == move.gettoX() && board.squareStatus(move) == 1)
+                        if (x == move.gettoX() && board.squareStatus(move) != 1)
                         {
-                            return false;
+                            return true;
                         }
                         return false;
                     }
@@ -228,7 +237,7 @@ namespace Chess
         }
 
         //kollar om kungen står i check
-        public bool isCheck(int kingX, int kingY, Player p)
+        public bool isCheck(King king)
         {
             for (int x = 0; x < board.get().GetLength(0); x++)
             {
@@ -237,11 +246,12 @@ namespace Chess
                     if (board.get()[x, y] != null)
                     {
                         ChessPiece temp = board.get()[x, y];
-                        if (temp.getPlayer != p)
+                        if (temp.getPlayer.getColour != king.getPlayer.getColour)
                         {
-                            Move move = new Move(x, y, kingX, kingY);//move som går till motståndarens kung position
+                            Move move = new Move(x, y, king.posX, king.posY);//move som går till motståndarens kung position
                             if (isValid(move, board.colourOfPiece(move)))
                             {
+                                System.Console.WriteLine("return false från ischeck");
                                 return true;
                             }
 
@@ -251,11 +261,13 @@ namespace Chess
                 }
 
             }
+            System.Console.WriteLine("return false från ischeck");
             return false;
         }
 
         public bool isCheckMate(King king)
         {
+         
             int posX = king.posX;
             int posY = king.posY;
             for (int x = 0; x < board.get().GetLength(0); x++)
@@ -263,7 +275,7 @@ namespace Chess
                 for (int y = 0; y < board.get().GetLength(1); y++)
                 {
                     Move move = new Move(posX, posY, x, y);
-                    if (isValid(move, board.colourOfPiece(move)) && !isCheck(x, y, king.getPlayer))
+                    if (isValid(move, board.colourOfPiece(move)) && !isCheck(king))
                     {
                         return false;
                     }
