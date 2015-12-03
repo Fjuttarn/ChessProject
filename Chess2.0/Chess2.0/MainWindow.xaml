@@ -65,7 +65,9 @@
 
         <Border Grid.Column="1" Grid.Row="0" Background="Black" MouseLeftButtonUp="Border_MouseLeftButtonUp"/>
         <Border Grid.Column="1" Grid.Row="1" Background="Beige" MouseLeftButtonUp="Border_MouseLeftButtonUp"/>
-        <Border Grid.Column="1" Grid.Row="2" Background="Black" MouseLeftButtonUp="Border_MouseLeftButtonUp"/>
+        <Border Grid.Column="1" Grid.Row="2" Background="Black" MouseLeftButtonUp="Border_MouseLeftButtonUp">
+            <Image Source="images/white_farmer.png"/>
+        </Border>
         <Border Grid.Column="1" Grid.Row="3" Background="Beige" MouseLeftButtonUp="Border_MouseLeftButtonUp"/>
         <Border Grid.Column="1" Grid.Row="4" Background="Black" MouseLeftButtonUp="Border_MouseLeftButtonUp"/>
         <Border Grid.Column="1" Grid.Row="5" Background="Beige" MouseLeftButtonUp="Border_MouseLeftButtonUp"/>
