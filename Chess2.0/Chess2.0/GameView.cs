@@ -81,7 +81,7 @@ namespace Chess2._0
             
             if (rules.isValid(move, gamestatus))
             {
-                //gui.updateBoard();
+                window.updateBoard();
                 board.updateTable(move);
                 switchTurn();
                 System.Console.WriteLine(gamestatus + " turn!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.");
