@@ -153,7 +153,7 @@ namespace Chess2._0
 
                 private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
                 {
-            
+                Border clickedSquare;
                 Image c = e.Source as Image;
                 int row = Grid.GetRow(c);
                 int col = Grid.GetColumn(c);
@@ -162,9 +162,12 @@ namespace Chess2._0
                     piecesToUpdate[0] = c;
                     move[1] = row;
                     move[0] = col;
+                    clickedSquare = getBorder(move[0], move[1]); 
                     firstClick = false;
-                    // MessageBox.Show("X: " + move[0] + "Y: " + move[1]);
-                }
+                    clickedSquare.BorderThickness = new Thickness(5);
+                    clickedSquare.BorderBrush = new SolidColorBrush(Colors.Yellow);
+                // MessageBox.Show("X: " + move[0] + "Y: " + move[1]);
+            }
                 else if (!firstClick)
                 {
                     piecesToUpdate[1] = c;
@@ -172,9 +175,11 @@ namespace Chess2._0
                     move[2] = col;
                     //MessageBox.Show("X: " + move[2] + "Y: " + move[3]);
                     firstClick = true;
-
-                    //notify subscribers
-                    Action<int[]> change = onMoveCompleted;
+                    clickedSquare = getBorder(move[0], move[1]);
+                    clickedSquare.ClearValue(Border.BorderThicknessProperty);
+                    clickedSquare.ClearValue(Border.BorderBrushProperty);
+                //notify subscribers
+                Action<int[]> change = onMoveCompleted;
                     if (change != null)
                     {
                         change(move);
@@ -183,6 +188,13 @@ namespace Chess2._0
                 }
             
                 }
+
+        public Border getBorder(int x, int y)
+        {
+            Border border = (Border)TheGrid.Children.Cast<UIElement>().
+            FirstOrDefault(e => Grid.GetColumn(e) == x && Grid.GetRow(e) == y);
+            return border;
+        }
 
         public void updateBoard()
         {
