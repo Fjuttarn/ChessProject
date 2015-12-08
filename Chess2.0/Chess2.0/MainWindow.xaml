@@ -82,7 +82,7 @@
             
         <Border Grid.Column="6" Grid.Row="0" Background="Beige" />
         <Image Grid.Column="6" Grid.Row="0" Source="images/white_horse.png"/>
-        <Border Grid.Column="6" Grid.Row="1" Background="Brown" />
+        <Border Name="_61" Grid.Column="6" Grid.Row="1" Background="Brown" />
         <Image Grid.Column="6" Grid.Row="1" Source="images/white_farmer.png"/>
         <Border Grid.Column="6" Grid.Row="2" Background="Beige" />
         <Image Grid.Column="6" Grid.Row="2" Source="images/Empty.png"/>
