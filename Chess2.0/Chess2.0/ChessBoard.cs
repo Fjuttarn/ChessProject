@@ -134,7 +134,14 @@ namespace Chess2._0
 
         public string colourOfPiece(Move move)
         {
-            return board[move.getfromX(), move.getfromY()].getPlayer.getColour;
+            if (board[move.getfromX(), move.getfromY()] != null)
+            {
+
+
+                return board[move.getfromX(), move.getfromY()].getPlayer.getColour;
+            }
+            else return "";
+
         }
 
     }

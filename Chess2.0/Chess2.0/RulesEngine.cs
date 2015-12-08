@@ -76,6 +76,8 @@ namespace Chess2._0
             if (move.getfromX() < move.gettoX() && move.getfromY() < move.gettoY()) //x och y ökar
             {
 
+                System.Console.WriteLine("inne i rätt if x minkar y ökar1");
+
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
                     y++;
@@ -96,6 +98,8 @@ namespace Chess2._0
 
             if (move.getfromX() > move.gettoX() && move.getfromY() > move.gettoY()) //x och y minskar
             {
+
+                System.Console.WriteLine("inne i rätt if x minkar y ökar2");
                 for (int x = move.getfromX() - 1; x <= move.gettoX(); x--)
                 {
                     y--;
@@ -116,6 +120,8 @@ namespace Chess2._0
 
             if (move.getfromX() < move.gettoX() && move.getfromY() > move.gettoY()) //x ökar, y minskar
             {
+
+                System.Console.WriteLine("inne i rätt if x minkar y ökar3");
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
                     y--;
@@ -136,6 +142,8 @@ namespace Chess2._0
 
             if (move.getfromX() > move.gettoX() && move.getfromY() < move.gettoY()) //x minskar, y ökar
             {
+
+                System.Console.WriteLine("inne i rätt if x minkar y ökar4");
                 for (int x = move.getfromX() - 1; x <= move.gettoX(); x--)
                 {
                     y++;

@@ -12,11 +12,13 @@ namespace Chess2._0
 
         public override Boolean isValidMove(Move move)
         {
-            if (move.gettoX() - move.getfromX() == move.gettoY() - move.getfromY())
+            if (Math.Abs(move.gettoX() - move.getfromX()) == Math.Abs(move.gettoY() - move.getfromY()))
             {
+
+                System.Console.WriteLine("Springare draget är tillåtet");
                 return true;
             }
-            else if (move.gettoX() + move.getfromX() == move.gettoY() + move.getfromY())
+            else if (move.gettoX() - move.getfromX() == move.getfromY() - move.gettoY())
             {
                 return true;
             }

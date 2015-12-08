@@ -24,7 +24,7 @@ namespace Chess2._0
                     return true;
                 }
 
-                if (move.gettoY() - move.getfromY() == 1 && (move.gettoX() - move.getfromX() == 1 ||
+                if (move.gettoY() - move.getfromY() == 1 && (move.gettoX() - move.getfromX() == -1 ||
                     (move.gettoX() - move.getfromX() == 1 && move.gettoY() - move.getfromY() == 1) ||
                     (move.gettoX() == move.getfromX() && move.gettoY() - move.getfromY() == 1)))
                 {
