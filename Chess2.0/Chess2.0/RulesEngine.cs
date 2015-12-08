@@ -100,7 +100,7 @@ namespace Chess2._0
             {
 
                 System.Console.WriteLine("inne i rätt if x minkar y ökar2");
-                for (int x = move.getfromX() - 1; x <= move.gettoX(); x--)
+                for (int x = move.getfromX() - 1; x >= move.gettoX(); x--)
                 {
                     y--;
                     if (board.get()[x, y] != null)//om någon pjäs står i vägen
@@ -144,7 +144,7 @@ namespace Chess2._0
             {
 
                 System.Console.WriteLine("inne i rätt if x minkar y ökar4");
-                for (int x = move.getfromX() - 1; x <= move.gettoX(); x--)
+                for (int x = move.getfromX() - 1; x >= move.gettoX(); x--)
                 {
                     y++;
                     if (board.get()[x, y] != null)//om någon pjäs står i vägen
