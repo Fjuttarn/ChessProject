@@ -75,9 +75,6 @@ namespace Chess2._0
             int y = move.getfromY();
             if (move.getfromX() < move.gettoX() && move.getfromY() < move.gettoY()) //x och y ökar
             {
-
-                System.Console.WriteLine("inne i rätt if x minkar y ökar1");
-
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
                     y++;
@@ -98,8 +95,6 @@ namespace Chess2._0
 
             if (move.getfromX() > move.gettoX() && move.getfromY() > move.gettoY()) //x och y minskar
             {
-
-                System.Console.WriteLine("inne i rätt if x minkar y ökar2");
                 for (int x = move.getfromX() - 1; x >= move.gettoX(); x--)
                 {
                     y--;
@@ -120,8 +115,6 @@ namespace Chess2._0
 
             if (move.getfromX() < move.gettoX() && move.getfromY() > move.gettoY()) //x ökar, y minskar
             {
-
-                System.Console.WriteLine("inne i rätt if x minkar y ökar3");
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
                     y--;
@@ -142,8 +135,7 @@ namespace Chess2._0
 
             if (move.getfromX() > move.gettoX() && move.getfromY() < move.gettoY()) //x minskar, y ökar
             {
-
-                System.Console.WriteLine("inne i rätt if x minkar y ökar4");
+                
                 for (int x = move.getfromX() - 1; x >= move.gettoX(); x--)
                 {
                     y++;
@@ -177,7 +169,6 @@ namespace Chess2._0
                     {
                         if (y == move.gettoY() && board.squareStatus(move) != 1)
                         {
-                            System.Console.WriteLine("verticalt tillåtet 1");
                             return true;
                         }
                         return false;
@@ -195,14 +186,11 @@ namespace Chess2._0
                     {
                         if (y == move.gettoY() && (board.squareStatus(move) != 1))
                         {
-                            System.Console.WriteLine("verticalt tillåtet 2");
                             return true;
                         }
-                        System.Console.WriteLine("returnerar falskt 3");
                         return false;
                     }
                 }
-                System.Console.WriteLine("verticalt tillåtet 3");
                 return true;
             }
             return false;
@@ -259,7 +247,6 @@ namespace Chess2._0
                             Move move = new Move(x, y, king.posX, king.posY);//move som går till motståndarens kung position
                             if (isValid(move, board.colourOfPiece(move)))
                             {
-                                System.Console.WriteLine("return false från ischeck");
                                 return true;
                             }
 
@@ -275,7 +262,7 @@ namespace Chess2._0
 
         public bool isCheckMate(King king)
         {
-         
+            King tempKing = king;
             int posX = king.posX;
             int posY = king.posY;
             for (int x = 0; x < board.get().GetLength(0); x++)
@@ -283,7 +270,9 @@ namespace Chess2._0
                 for (int y = 0; y < board.get().GetLength(1); y++)
                 {
                     Move move = new Move(posX, posY, x, y);
-                    if (isValid(move, board.colourOfPiece(move)) && !isCheck(king))
+                    tempKing.posX = x;
+                    tempKing.posY = y;
+                    if (isValid(move, board.colourOfPiece(move)) && !isCheck(tempKing))
                     {
                         return false;
                     }

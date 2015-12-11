@@ -20,7 +20,6 @@ namespace Chess2._0
                 if (move.gettoY() - move.getfromY() == 2 && move.gettoX() == move.getfromX() 
                     && move.getfromY() == 1)
                 {
-                    System.Console.WriteLine(" bondeHUMAN Draget är tillåtet!");
                     return true;
                 }
 
@@ -28,7 +27,6 @@ namespace Chess2._0
                     (move.gettoX() - move.getfromX() == 1 && move.gettoY() - move.getfromY() == 1) ||
                     (move.gettoX() == move.getfromX() && move.gettoY() - move.getfromY() == 1)))
                 {
-                    System.Console.WriteLine(" bondeHUMAN Draget är tillåtet!");
                     return true;
                 }
             }
@@ -39,7 +37,6 @@ namespace Chess2._0
                 if (move.gettoY() - move.getfromY() == -2 && move.gettoX() == move.getfromX() 
                     && move.getfromY() == 6)
                 {
-                    System.Console.WriteLine("1bondeCPU Draget är tillåtet!");
                     return true;
                 }
 
@@ -47,12 +44,10 @@ namespace Chess2._0
                     (move.gettoX() - move.getfromX() == -1 && (move.gettoY() - move.getfromY() == -1) ||
                     (move.gettoX() == move.getfromX() && move.gettoY() - move.getfromY() == -1)))
                 {
-                    System.Console.WriteLine("2bondeCPU Draget är tillåtet!");
                     return true;
                 }
             }
-
-            System.Console.WriteLine("3bondeCPU Draget är inte tillåtet!");
+            
             return false;
         }
     }
