@@ -155,8 +155,10 @@ namespace Chess2._0
                 {
                 Border clickedSquare;
                 Image c = e.Source as Image;
+        
                 int row = Grid.GetRow(c);
                 int col = Grid.GetColumn(c);
+
                 if (firstClick)
                 {
                     piecesToUpdate[0] = c;

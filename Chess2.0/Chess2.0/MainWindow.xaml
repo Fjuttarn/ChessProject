@@ -129,7 +129,7 @@
         <Border Grid.Column="4" Grid.Row="6" Background="Beige" />
         <Image Grid.Column="4" Grid.Row="6" Source="images/black_farmer.png"/>
         <Border Grid.Column="4" Grid.Row="7" Background="Brown" />
-        <Image Grid.Column="4" Grid.Row="7" Source="images/black_queen.png"/>
+        <Image Grid.Column="4" Grid.Row="7" Source="images/black_king.png"/>
 
         <Border Grid.Column="3" Grid.Row="0" Background="Brown" />
         <Image Grid.Column="3" Grid.Row="0" Source="images/white_king.png"/>
@@ -146,7 +146,7 @@
         <Border Grid.Column="3" Grid.Row="6" Background="Brown" />
         <Image Grid.Column="3" Grid.Row="6" Source="images/black_farmer.png"/>
         <Border Grid.Column="3" Grid.Row="7" Background="Beige" />
-        <Image Grid.Column="3" Grid.Row="7" Source="images/black_king.png"/>
+        <Image Grid.Column="3" Grid.Row="7" Source="images/black_queen.png"/>
 
         <Border Grid.Column="2" Grid.Row="0" Background="Beige" />
         <Image Grid.Column="2" Grid.Row="0" Source="images/white_runner.png"/>
