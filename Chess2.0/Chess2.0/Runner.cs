@@ -14,22 +14,12 @@ namespace Chess2._0
         {
             if(Math.Abs(move.gettoX() - move.getfromX()) == Math.Abs(move.gettoY() - move.getfromY()))
             {
-
-                System.Console.WriteLine("Springare draget är tillåtet");
                 return true;
             }else if (move.gettoX() - move.getfromX() == move.getfromY() - move.gettoY())
             {
                 return true;
             }
-            /*
-            else if(move.gettoX() + move.getfromX() == move.gettoY() + move.getfromY())
-            {
-
-                System.Console.WriteLine("Springare draget är tillåtet");
-                return true;
-            }
-            */
-            System.Console.WriteLine("springare draget är inte tillåtet");
+     
             return false;
         }
     }

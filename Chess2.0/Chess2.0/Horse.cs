@@ -16,7 +16,6 @@ namespace Chess2._0
             {
                 if(move.getfromX() - move.gettoX() == 1 || move.getfromX() - move.gettoX() == -1)
                 {
-                    System.Console.WriteLine("häst Draget är tillåtet!");
                     return true;
                 }
             }
@@ -24,11 +23,9 @@ namespace Chess2._0
             {
                 if (move.getfromY() - move.gettoY() == 1 || move.getfromY() - move.gettoY() == -1)
                 {
-                    System.Console.WriteLine("häst Draget är tillåtet!");
                     return true;
                 }
             }
-            System.Console.WriteLine("häst Draget är inte tillåtet!");
             return false;
         }
     }
