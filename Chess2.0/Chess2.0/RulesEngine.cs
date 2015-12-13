@@ -249,14 +249,10 @@ namespace Chess2._0
                             {
                                 return true;
                             }
-
                         }
-
                     }
                 }
-
             }
-            System.Console.WriteLine("return false från ischeck");
             return false;
         }
 

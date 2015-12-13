@@ -99,6 +99,11 @@ namespace Chess2._0
 
         public Action<int[]> onMoveCompleted { get; set; }
 
+        public void gameOver(string gamestatus)
+        {
+            MessageBox.Show(gamestatus);
+            System.Environment.Exit(1);
+        }
 
 
 

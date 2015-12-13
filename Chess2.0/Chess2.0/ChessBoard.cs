@@ -106,9 +106,33 @@ namespace Chess2._0
             board[move.getfromX(), move.getfromY()] = null;
             board[move.gettoX(), move.gettoY()].posX = move.gettoX();
             board[move.gettoX(), move.gettoY()].posY = move.gettoY();
-
         }
 
+        public bool isKingDead(String gameStatus)
+        {
+            for (int x = 0; x < board.GetLength(0); x++)
+            {
+                for (int y = 0; y < board.GetLength(1); y++)
+                {
+                    if (gameStatus.Equals("white"))
+                    {
+                        if(board[x,y] == whiteKing)
+                        {
+                            return false;
+                        }
+                    }
+                    else if (gameStatus.Equals("black"))
+                    {
+                        if (board[x, y] == blackKing)
+                        {
+                            return false;
+                        }
+                    }
+
+                }
+            }
+            return true;
+        }
         //1. Egen pjäs
         //2. Motståndares pjäs
         //3. Tom ruta
@@ -136,8 +160,7 @@ namespace Chess2._0
         {
             if (board[move.getfromX(), move.getfromY()] != null)
             {
-
-
+                
                 return board[move.getfromX(), move.getfromY()].getPlayer.getColour;
             }
             else return "";
@@ -146,7 +169,3 @@ namespace Chess2._0
 
     }
 }
-/*
--   att göra: calla på isCheckMate() på bra ställe, 
--   fixa så att spelet skiftar mellan p1 och p2, 
--   fixa så att p1 inte kan röra p2s pjäser och viseversa.*/
