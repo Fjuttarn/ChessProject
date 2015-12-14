@@ -28,8 +28,8 @@ namespace Chess2._0
         }
         public void updateLists()
         {
-            //myPieces.Clear();
-            //enemyPieces.Clear();
+            myPieces.Clear();
+            enemyPieces.Clear();
             for (int fromx = 0; fromx < board.GetLength(0); fromx++)
             {
                 for (int fromy = 0; fromy < board.GetLength(1); fromy++)
@@ -37,7 +37,7 @@ namespace Chess2._0
                     if (board[fromx, fromy] != null)
                     {
                         ChessPiece current = board[fromx, fromy];
-                        if (board[fromx, fromy].getPlayer is HumanPlayer)//det är vår spelare
+                        if (board[fromx, fromy].getPlayer.getColour != this.getColour)//det är vår spelare
                         {
                             enemyPieces.Add(current);
                         }
@@ -152,7 +152,7 @@ namespace Chess2._0
             if (board[toX, toY] is King)//det är en kung
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, "black"))
+                if (rules.isValid(move, this.getColour))
                 {
                     return true;
                 }
@@ -167,7 +167,7 @@ namespace Chess2._0
             if (board[toX, toY] is Queen)//det är en queen
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, "black"))
+                if (rules.isValid(move, this.getColour))
                 {
                     return true;
                 }
@@ -181,7 +181,7 @@ namespace Chess2._0
             if (board[toX, toY] is Tower || board[toX, toY] is Runner || board[toX, toY] is Horse)//det är en horse, runner eller tower
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, "black"))
+                if (rules.isValid(move, this.getColour))
                 {
                     return true;
                 }
@@ -196,7 +196,7 @@ namespace Chess2._0
             if (board[toX, toY] is Farmer)
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, "black"))
+                if (rules.isValid(move, this.getColour))
                 {
                     return true;
                 }
@@ -216,7 +216,7 @@ namespace Chess2._0
                     for (int toy = 0; toy < board.GetLength(1); toy++)
                     {
                         Move move = new Move(myPiece.posX, myPiece.posY, tox, toy);
-                        if (rules.isValid(move, "black"))
+                        if (rules.isValid(move, this.getColour))
                         {
                             validMoves.Add(move);
                         }
@@ -228,7 +228,7 @@ namespace Chess2._0
 
             System.Console.WriteLine("enemy pjäser: " + enemyPieces.Count);
             Random rnd = new Random();
-            int rng = rnd.Next(1, validMoves.Count); //slumpar fram ett move
+            int rng = rnd.Next(0, validMoves.Count); //slumpar fram ett move
             Move rngMove = validMoves[rng] as Move;
             System.Console.WriteLine(rng);
             System.Console.WriteLine("fromX " + rngMove.getfromX() + "fromY: " + rngMove.getfromY() + "tox: " + rngMove.gettoX() + " toY: " + rngMove.gettoY());
