@@ -204,7 +204,7 @@ namespace Chess2._0
             {
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
-                    if (board.get()[x, move.getfromX()] != null)
+                    if (board.get()[x, move.getfromY()] != null)
                     {
                         if (x == move.gettoX() && board.squareStatus(move) != 1)
                         {

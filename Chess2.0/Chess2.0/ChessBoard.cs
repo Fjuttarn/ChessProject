@@ -116,14 +116,14 @@ namespace Chess2._0
                 {
                     if (gameStatus.Equals("white"))
                     {
-                        if(board[x,y] == whiteKing)
+                        if(board[x,y] == blackKing)
                         {
                             return false;
                         }
                     }
                     else if (gameStatus.Equals("black"))
                     {
-                        if (board[x, y] == blackKing)
+                        if (board[x, y] == whiteKing)
                         {
                             return false;
                         }

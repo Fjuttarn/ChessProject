@@ -23,7 +23,7 @@ namespace Chess2._0
                 return true;
             }
             else if ((move.gettoX() - move.getfromX() == 1 || move.gettoX() - move.getfromX() == -1) &&
-                (move.gettoY() - move.getfromY() == 1 || move.gettoY() - move.getfromY() == -1))
+                (move.gettoY() - move.getfromY() == 0 ))
             {
                 return true;
             }
