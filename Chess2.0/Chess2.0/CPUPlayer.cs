@@ -18,11 +18,13 @@ namespace Chess2._0
 
         public CPUPlayer(String colour) : base(colour) { }
         
-        public override void setupAI(ChessBoard chessboard)
+        public override void setupAI(ChessBoard chessboard, GameView gw)
         {
             this.chessboard = chessboard;
             this.rules = new RulesEngine(chessboard);
             this.board = chessboard.get();
+            this.gw = gw;
+
         }
         public void updateLists()
         {

@@ -13,7 +13,20 @@ namespace Chess2._0
         Player playerblack;
         Player playerwhite = new HumanPlayer("white");
         RulesEngine rules;
-        String gamestatus = "white";
+        String _gamestatus = "white";
+        public String gamestatus
+        {
+            get { return _gamestatus; }
+            set
+            {
+                _gamestatus = value;
+                if(_gamestatus == "black")
+                {
+                    playerblack.AImove();
+                }
+            }
+        }
+
 
 
         public GameView(MainWindow window)
@@ -23,7 +36,7 @@ namespace Chess2._0
             playerblack = new CPUPlayer("black");
             board = new ChessBoard(playerwhite, playerblack);
             rules = new RulesEngine(board);
-            playerblack.setupAI(board);
+            playerblack.setupAI(board, this);
             window.setBoard(board.get());
         }
         public void onMoveCompleted (int[] newMove)
@@ -49,17 +62,18 @@ namespace Chess2._0
                 board.updateTable(move);
                 window.updateTable();
                 switchTurn();
-             
-               
+
+
                 System.Console.WriteLine(gamestatus + " turn");
 
-               
+                if (board.isKingDead(gamestatus))
+                {
+                    gamestatus = "The " + gamestatus + " king is dead, Game Over!";
+                    window.gameOver(gamestatus);
+                }
+          
             }
-            if (board.isKingDead(gamestatus))
-            {
-                gamestatus = "The " + gamestatus + " king is dead, Game Over!";
-                window.gameOver(gamestatus);
-            }
+       
             /*
             if (rules.isCheck(board.getWhiteKing()))
             {

@@ -22,7 +22,7 @@ namespace Chess2._0
                 return colour;
             }
         }
-        public virtual void setupAI(ChessBoard chessboard) { }
+        public virtual void setupAI(ChessBoard chessboard, GameView gw) { }
 
         public virtual void AImove() { }
     }
