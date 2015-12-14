@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-   class GameView
+  public class GameView
     {
         MainWindow window;
         ChessBoard board;
@@ -24,6 +24,7 @@ namespace Chess2._0
             board = new ChessBoard(playerwhite, playerblack);
             rules = new RulesEngine(board);
             playerblack.setupAI(board);
+            window.setBoard(board.get());
         }
         public void onMoveCompleted (int[] newMove)
         {
@@ -44,8 +45,9 @@ namespace Chess2._0
             
             if (rules.isValid(move, gamestatus))
             {
-                window.updateBoard(move);
+               // window.updateBoard(move);
                 board.updateTable(move);
+                window.updateTable();
                 switchTurn();
              
                

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    class ChessBoard
+   public class ChessBoard
     {
         private ChessPiece[,] board = new ChessPiece[8, 8];
         private ChessPiece whiteKing;

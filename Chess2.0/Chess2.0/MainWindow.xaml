@@ -63,141 +63,78 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <!--
         <Border Grid.Column="7" Grid.Row="0" Background="Brown" />
-        <Image Grid.Column="7" Grid.Row="0" Source="images/white_tower.png"/>
         <Border Grid.Column="7" Grid.Row="1" Background="Beige" />
-        <Image Grid.Column="7" Grid.Row="1" Source="images/white_farmer.png"/>
         <Border Grid.Column="7" Grid.Row="2" Background="Brown" />
-        <Image Grid.Column="7" Grid.Row="2" Source="images/Empty.png"/>
         <Border Grid.Column="7" Grid.Row="3" Background="Beige" />
-        <Image Grid.Column="7" Grid.Row="3" Source="images/Empty.png"/>
         <Border Grid.Column="7" Grid.Row="4" Background="Brown" />
-        <Image Grid.Column="7" Grid.Row="4" Source="images/Empty.png"/>
         <Border Grid.Column="7" Grid.Row="5" Background="Beige" />
-        <Image Grid.Column="7" Grid.Row="5" Source="images/Empty.png"/>
         <Border Grid.Column="7" Grid.Row="6" Background="Brown" />
-        <Image Grid.Column="7" Grid.Row="6" Source="images/black_farmer.png"/>
         <Border Grid.Column="7" Grid.Row="7" Background="Beige" />
-        <Image Grid.Column="7" Grid.Row="7" Source="images/black_tower.png"/>
             
         <Border Grid.Column="6" Grid.Row="0" Background="Beige" />
-        <Image Grid.Column="6" Grid.Row="0" Source="images/white_horse.png"/>
         <Border Name="_61" Grid.Column="6" Grid.Row="1" Background="Brown" />
-        <Image Grid.Column="6" Grid.Row="1" Source="images/white_farmer.png"/>
         <Border Grid.Column="6" Grid.Row="2" Background="Beige" />
-        <Image Grid.Column="6" Grid.Row="2" Source="images/Empty.png"/>
         <Border Grid.Column="6" Grid.Row="3" Background="Brown" />
-        <Image Grid.Column="6" Grid.Row="3" Source="images/Empty.png"/>
         <Border Grid.Column="6" Grid.Row="4" Background="Beige" />
-        <Image Grid.Column="6" Grid.Row="4" Source="images/Empty.png"/>
         <Border Grid.Column="6" Grid.Row="5" Background="Brown" />
-        <Image Grid.Column="6" Grid.Row="5" Source="images/Empty.png"/>
         <Border Grid.Column="6" Grid.Row="6" Background="Beige" />
-        <Image Grid.Column="6" Grid.Row="6" Source="images/black_farmer.png"/>
         <Border Grid.Column="6" Grid.Row="7" Background="Brown" />
-        <Image Grid.Column="6" Grid.Row="7" Source="images/black_horse.png"/>
         
         <Border Grid.Column="5" Grid.Row="0" Background="Brown" />
-        <Image Grid.Column="5" Grid.Row="0" Source="images/white_runner.png"/>
         <Border Grid.Column="5" Grid.Row="1" Background="Beige" />
-        <Image Grid.Column="5" Grid.Row="1" Source="images/white_farmer.png"/>
         <Border Grid.Column="5" Grid.Row="2" Background="Brown" />
-        <Image Grid.Column="5" Grid.Row="2" Source="images/Empty.png"/>
         <Border Grid.Column="5" Grid.Row="3" Background="Beige" />
-        <Image Grid.Column="5" Grid.Row="3" Source="images/Empty.png"/>
         <Border Grid.Column="5" Grid.Row="4" Background="Brown" />
-        <Image Grid.Column="5" Grid.Row="4" Source="images/Empty.png"/>
         <Border Grid.Column="5" Grid.Row="5" Background="Beige" />
-        <Image Grid.Column="5" Grid.Row="5" Source="images/Empty.png"/>
         <Border Grid.Column="5" Grid.Row="6" Background="Brown" />
-        <Image Grid.Column="5" Grid.Row="6" Source="images/black_farmer.png"/>
         <Border Grid.Column="5" Grid.Row="7" Background="Beige" />
-        <Image Grid.Column="5" Grid.Row="7" Source="images/black_runner.png"/>
 
         <Border Grid.Column="4" Grid.Row="0" Background="Beige" />
-        <Image Grid.Column="4" Grid.Row="0" Source="images/white_queen.png"/>
         <Border Grid.Column="4" Grid.Row="1" Background="Brown" />
-        <Image Grid.Column="4" Grid.Row="1" Source="images/white_farmer.png"/>
         <Border Grid.Column="4" Grid.Row="2" Background="Beige" />
-        <Image Grid.Column="4" Grid.Row="2" Source="images/Empty.png"/>
         <Border Grid.Column="4" Grid.Row="3" Background="Brown" />
-        <Image Grid.Column="4" Grid.Row="3" Source="images/Empty.png"/>
         <Border Grid.Column="4" Grid.Row="4" Background="Beige" />
-        <Image Grid.Column="4" Grid.Row="4" Source="images/Empty.png"/>
         <Border Grid.Column="4" Grid.Row="5" Background="Brown" />
-        <Image Grid.Column="4" Grid.Row="5" Source="images/Empty.png"/>
         <Border Grid.Column="4" Grid.Row="6" Background="Beige" />
-        <Image Grid.Column="4" Grid.Row="6" Source="images/black_farmer.png"/>
         <Border Grid.Column="4" Grid.Row="7" Background="Brown" />
-        <Image Grid.Column="4" Grid.Row="7" Source="images/black_king.png"/>
 
         <Border Grid.Column="3" Grid.Row="0" Background="Brown" />
-        <Image Grid.Column="3" Grid.Row="0" Source="images/white_king.png"/>
         <Border Grid.Column="3" Grid.Row="1" Background="Beige"/>
-        <Image Grid.Column="3" Grid.Row="1" Source="images/white_farmer.png"/>
         <Border Grid.Column="3" Grid.Row="2" Background="Brown" />
-        <Image Grid.Column="3" Grid.Row="2" Source="images/Empty.png"/>
         <Border Grid.Column="3" Grid.Row="3" Background="Beige" />
-        <Image Grid.Column="3" Grid.Row="3" Source="images/Empty.png"/>
         <Border Grid.Column="3" Grid.Row="4" Background="Brown" />
-        <Image Grid.Column="3" Grid.Row="4" Source="images/Empty.png"/>
         <Border Grid.Column="3" Grid.Row="5" Background="Beige" />
-        <Image Grid.Column="3" Grid.Row="5" Source="images/Empty.png"/>
         <Border Grid.Column="3" Grid.Row="6" Background="Brown" />
-        <Image Grid.Column="3" Grid.Row="6" Source="images/black_farmer.png"/>
         <Border Grid.Column="3" Grid.Row="7" Background="Beige" />
-        <Image Grid.Column="3" Grid.Row="7" Source="images/black_queen.png"/>
 
         <Border Grid.Column="2" Grid.Row="0" Background="Beige" />
-        <Image Grid.Column="2" Grid.Row="0" Source="images/white_runner.png"/>
         <Border Grid.Column="2" Grid.Row="1" Background="Brown" />
-        <Image Grid.Column="2" Grid.Row="1" Source="images/white_farmer.png"/>
         <Border Grid.Column="2" Grid.Row="2" Background="Beige"/>
-        <Image Grid.Column="2" Grid.Row="2" Source="images/Empty.png"/>
         <Border Grid.Column="2" Grid.Row="3" Background="Brown" />
-        <Image Grid.Column="2" Grid.Row="3" Source="images/Empty.png"/>
         <Border Grid.Column="2" Grid.Row="4" Background="Beige" />
-        <Image Grid.Column="2" Grid.Row="4" Source="images/Empty.png"/>
         <Border Grid.Column="2" Grid.Row="5" Background="Brown" />
-        <Image Grid.Column="2" Grid.Row="5" Source="images/Empty.png"/>
         <Border Grid.Column="2" Grid.Row="6" Background="Beige" />
-        <Image Grid.Column="2" Grid.Row="6" Source="images/black_farmer.png"/>
         <Border Grid.Column="2" Grid.Row="7" Background="Brown" />
-        <Image Grid.Column="2" Grid.Row="7" Source="images/black_runner.png"/>
 
         <Border Grid.Column="1" Grid.Row="0" Background="Brown" />
-        <Image Grid.Column="1" Grid.Row="0" Source="images/white_horse.png"/>
         <Border Grid.Column="1" Grid.Row="1" Background="Beige" />
-        <Image Grid.Column="1" Grid.Row="1" Source="images/white_farmer.png"/>
         <Border Grid.Column="1" Grid.Row="2" Background="Brown" />
-        <Image Grid.Column="1" Grid.Row="2" Source="images/Empty.png"/>
         <Border Grid.Column="1" Grid.Row="3" Background="Beige" />
-        <Image Grid.Column="1" Grid.Row="3" Source="images/Empty.png"/>
         <Border Grid.Column="1" Grid.Row="4" Background="Brown" />
-        <Image Grid.Column="1" Grid.Row="4" Source="images/Empty.png"/>
         <Border Grid.Column="1" Grid.Row="5" Background="Beige" />
-        <Image Grid.Column="1" Grid.Row="5" Source="images/Empty.png"/>
         <Border Grid.Column="1" Grid.Row="6" Background="Brown" />
-        <Image Grid.Column="1" Grid.Row="6" Source="images/black_farmer.png"/>
         <Border Grid.Column="1" Grid.Row="7" Background="Beige" />
-        <Image Grid.Column="1" Grid.Row="7" Source="images/black_horse.png"/>
 
         <Border Grid.Column="0" Grid.Row="0" Background="Beige" />
-        <Image Grid.Column="0" Grid.Row="0" Source="images/white_tower.png"/>
         <Border Grid.Column="0" Grid.Row="1" Background="Brown" />
-        <Image Grid.Column="0" Grid.Row="1" Source="images/white_farmer.png"/>
         <Border Grid.Column="0" Grid.Row="2" Background="Beige" />
-        <Image Grid.Column="0" Grid.Row="2" Source="images/Empty.png"/>
         <Border Grid.Column="0" Grid.Row="3" Background="Brown" />
-        <Image Grid.Column="0" Grid.Row="3" Source="images/Empty.png"/>
         <Border Grid.Column="0" Grid.Row="4" Background="Beige" />
-        <Image Grid.Column="0" Grid.Row="4" Source="images/Empty.png"/>
         <Border Grid.Column="0" Grid.Row="5" Background="Brown" />
-        <Image Grid.Column="0" Grid.Row="5" Source="images/Empty.png"/>
         <Border Grid.Column="0" Grid.Row="6" Background="Beige" />
-        <Image Grid.Column="0" Grid.Row="6" Source="images/black_farmer.png"/>
         <Border Grid.Column="0" Grid.Row="7" Background="Brown" />
-        <Image Grid.Column="0" Grid.Row="7" Source="images/black_tower.png"/>
-
+-->
     </Grid>
 </Window>

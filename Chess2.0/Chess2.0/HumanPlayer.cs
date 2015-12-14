@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    class HumanPlayer : Player
+    public class HumanPlayer : Player
     {
         public HumanPlayer(String colour) : base(colour) { }
 

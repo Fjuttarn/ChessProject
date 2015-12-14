@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    abstract class ChessPiece
+    public abstract class ChessPiece
     {
         protected int positionX;
         protected int positionY;

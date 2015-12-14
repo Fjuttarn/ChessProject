@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    class RulesEngine
+   public class RulesEngine
     {
         private ChessBoard board;
 

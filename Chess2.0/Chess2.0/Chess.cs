@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    class Chess
+   public class Chess
     {
         GameView gw;
         public Chess (MainWindow mw)

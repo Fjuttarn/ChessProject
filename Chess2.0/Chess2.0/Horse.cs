@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    class Horse : ChessPiece
+   public class Horse : ChessPiece
     {
         public Horse(Player p, int posX, int posY) : base(p, posX, posY) {}
 

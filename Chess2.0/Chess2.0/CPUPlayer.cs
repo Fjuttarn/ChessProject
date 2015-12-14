@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    class CPUPlayer : Player
+   public class CPUPlayer : Player
     {
         GameView gw;
         RulesEngine rules;

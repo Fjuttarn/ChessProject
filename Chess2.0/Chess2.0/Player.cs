@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    partial class Player
+    public partial class Player
     {
         private string colour;
 
