@@ -61,17 +61,17 @@ namespace Chess2._0
                // window.updateBoard(move);
                 board.updateTable(move);
                 window.updateTable();
-                switchTurn();
+                
 
 
                 System.Console.WriteLine(gamestatus + " turn");
 
                 if (board.isKingDead(gamestatus))
                 {
-                    gamestatus = "The " + gamestatus + " king is dead, Game Over!";
+                    gamestatus = gamestatus + " player won, Game Over!";
                     window.gameOver(gamestatus);
                 }
-          
+                switchTurn();
             }
        
             /*
