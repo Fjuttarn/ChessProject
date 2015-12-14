@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    class Move
+   public class Move
     {
        private int fromX;
        private int fromY;

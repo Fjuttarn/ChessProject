@@ -160,7 +160,6 @@ namespace Chess2._0
         {
             if (board[move.getfromX(), move.getfromY()] != null)
             {
-                
                 return board[move.getfromX(), move.getfromY()].getPlayer.getColour;
             }
             else return "";

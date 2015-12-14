@@ -34,7 +34,9 @@ namespace Chess2._0
 
         public bool isLeagalMove(Move move)
         {//1 egen pjäs, 2 enemy pjäs, 3 tom ruta
+            
             ChessPiece current = board.get()[move.getfromX(), move.getfromY()];
+            
             if (current is Horse)
             {
                 if (board.squareStatus(move) == 1)//En av spelarens egna pjäser står i vägen

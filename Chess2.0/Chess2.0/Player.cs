@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    class Player
+    partial class Player
     {
         private string colour;
 
@@ -22,5 +22,8 @@ namespace Chess2._0
                 return colour;
             }
         }
+        public virtual void setupAI(ChessBoard chessboard) { }
+
+        public virtual void AImove() { }
     }
 }

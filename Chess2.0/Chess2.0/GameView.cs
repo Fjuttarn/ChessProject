@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-    class GameView
+   class GameView
     {
         MainWindow window;
-        Player playerblack = new CPUPlayer("black");
-        Player playerwhite = new HumanPlayer("white");
         ChessBoard board;
+        Player playerblack;
+        Player playerwhite = new HumanPlayer("white");
         RulesEngine rules;
         String gamestatus = "white";
 
@@ -19,8 +19,11 @@ namespace Chess2._0
         public GameView(MainWindow window)
         {
             this.window = window;
+
+            playerblack = new CPUPlayer("black");
             board = new ChessBoard(playerwhite, playerblack);
             rules = new RulesEngine(board);
+            playerblack.setupAI(board);
         }
         public void onMoveCompleted (int[] newMove)
         {
@@ -41,12 +44,14 @@ namespace Chess2._0
             
             if (rules.isValid(move, gamestatus))
             {
-                window.updateBoard();
+                window.updateBoard(move);
                 board.updateTable(move);
                 switchTurn();
              
                
                 System.Console.WriteLine(gamestatus + " turn");
+
+               
             }
             if (board.isKingDead(gamestatus))
             {
