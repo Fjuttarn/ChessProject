@@ -10,20 +10,18 @@ namespace Chess2._0
    public class ChessBoard
     {
         private ChessPiece[,] board = new ChessPiece[8, 8];
-        private ChessPiece whiteKing;
-        private ChessPiece blackKing;
         DataStorage ds = new DataStorage();
         public ChessBoard()
         {
             if (File.Exists(@".\chessdata\chessdata.xml"))
             {
-                board = ds.LoadData();
+                this.board = ds.LoadData();
                 ds.SaveData(board);
             }
             else
             {
                 //all white pieces
-                whiteKing = new King("white", 3, 0);
+                ChessPiece whiteKing = new King("white", 3, 0);
                 ChessPiece whiteQueen = new Queen("white", 4, 0);
                 ChessPiece whiteRunner1 = new Runner("white", 2, 0);
                 ChessPiece whiteRunner2 = new Runner("white", 5, 0);
@@ -41,7 +39,7 @@ namespace Chess2._0
                 ChessPiece whiteFarmer8 = new Farmer("white", 7, 1);
 
                 //all black pieces
-                blackKing = new King("black", 4, 7);
+                ChessPiece blackKing = new King("black", 4, 7);
                 ChessPiece blackQueen = new Queen("black", 3, 7);
                 ChessPiece blackRunner1 = new Runner("black", 2, 7);
                 ChessPiece blackRunner2 = new Runner("black", 5, 7);
@@ -101,15 +99,6 @@ namespace Chess2._0
             return board;
         }
 
-        public King getWhiteKing()
-        {
-            return (King)whiteKing;
-        }
-
-        public King getBlackKing()
-        {
-            return (King)blackKing;
-        }
         //Updaterar den brädet (arrayen) efter att ett drag genomförts
         public void updateTable(Move move)
         {
@@ -125,21 +114,26 @@ namespace Chess2._0
             {
                 for (int y = 0; y < board.GetLength(1); y++)
                 {
-                    if (gameStatus.Equals("white"))
+                    if (board[x, y] != null)
                     {
-                        if(board[x,y] == blackKing)
-                        {
-                            return false;
-                        }
-                    }
-                    else if (gameStatus.Equals("black"))
-                    {
-                        if (board[x, y] == whiteKing)
-                        {
-                            return false;
-                        }
-                    }
+                        ChessPiece temp = board[x, y];
 
+
+                        if (gameStatus.Equals("white"))
+                        {
+                            if (temp is King && temp.Color == "black")
+                            {
+                                return false;
+                            }
+                        }
+                        else if (gameStatus.Equals("black"))
+                        {
+                            if (temp is King && temp.Color == "white")
+                            {
+                                return false;
+                            }
+                        }
+                    }
                 }
             }
             return true;

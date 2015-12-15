@@ -39,6 +39,8 @@ namespace Chess2._0
             rules = new RulesEngine(board);
             playerblack.setupAI(board, this);
             window.setBoard(board.get());
+
+           // window.updateTable();
         }
         public void onMoveCompleted (int[] newMove)
         {
@@ -71,6 +73,7 @@ namespace Chess2._0
                 if (board.isKingDead(gamestatus))
                 {
                     gamestatus = gamestatus + " player won, Game Over!";
+                    ds.removeFile();
                     window.gameOver(gamestatus);
                 }
                 switchTurn();

@@ -111,7 +111,12 @@ namespace Chess2._0
         }
         public void updateTable()
         {
-            TheGrid.Children.Clear();
+            try
+            {
+                TheGrid.Children.Clear();
+            }
+            catch (Exception e) { }
+            
             paintTable();
             for (int x = 0; x < this.board.GetLength(0); x++)
             {
@@ -189,6 +194,7 @@ namespace Chess2._0
                     }
                     Grid.SetColumn(cell, x);
                     Grid.SetRow(cell, y);
+                    System.Console.WriteLine("varv");
                     TheGrid.Children.Add(cell);
                 }
             }

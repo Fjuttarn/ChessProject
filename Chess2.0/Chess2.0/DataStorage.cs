@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.IO;
+
 namespace Chess2._0
 {
     class DataStorage
@@ -15,7 +17,7 @@ namespace Chess2._0
         public ChessPiece[,] LoadData()
         {
             IEnumerable<string> posx = from chesspiece in XDocument.Load(@".\chessdata\chessdata.xml")
-                                                                .Descendants("ChessPiece")
+                                                               .Descendants("ChessPiece")
                                     select chesspiece.Element("posX").Value;
             IEnumerable<string> posy = from chesspiece in XDocument.Load(@".\chessdata\chessdata.xml")
                                                                .Descendants("ChessPiece")
@@ -33,38 +35,58 @@ namespace Chess2._0
             string[] colorlist = color.ToArray() as string[];
             string[] typelist = type.ToArray() as string[];
 
+            foreach (string str in posx)
+            {
+                System.Console.WriteLine("hejhej" + str);
+            }
+
+
             ChessPiece[,] board = new ChessPiece[8,8];
             for (int i = 0; i < posxlist.Length; i++)
             {
                 switch (typelist[i])
                 {
-                    case "King":
+                    case "Chess2._0.King":
                         ChessPiece king = new King(colorlist[i], int.Parse(posxlist[i]), int.Parse(posylist[i]));
                             board[int.Parse(posxlist[i]), int.Parse(posylist[i])] = king;
                         break;
-                    case "Queen":
+                    case "Chess2._0.Queen":
                         ChessPiece queen = new Queen(colorlist[i], int.Parse(posxlist[i]), int.Parse(posylist[i]));
                             board[int.Parse(posxlist[i]), int.Parse(posylist[i])] = queen;
                         break;
-                    case "Runner":
+                    case "Chess2._0.Runner":
                         ChessPiece runner = new Runner(colorlist[i], int.Parse(posxlist[i]), int.Parse(posylist[i]));
                             board[int.Parse(posxlist[i]), int.Parse(posylist[i])] = runner;
                         break;
-                    case "Horse":
+                    case "Chess2._0.Horse":
                         ChessPiece horse = new Horse(colorlist[i], int.Parse(posxlist[i]), int.Parse(posylist[i]));
                             board[int.Parse(posxlist[i]), int.Parse(posylist[i])] = horse;
                         break;
-                    case "Tower":
+                    case "Chess2._0.Tower":
                         ChessPiece tower = new Tower(colorlist[i], int.Parse(posxlist[i]), int.Parse(posylist[i]));
                             board[int.Parse(posxlist[i]), int.Parse(posylist[i])] = tower;
                         break;
-                    case "Farmer":
+                    case "Chess2._0.Farmer":
                         ChessPiece farmer = new Farmer(colorlist[i], int.Parse(posxlist[i]), int.Parse(posylist[i]));
                             board[int.Parse(posxlist[i]), int.Parse(posylist[i])] = farmer;
                         break;
                 }
             }
-            return board;
+            for (int x = 0; x < board.GetLength(0); x++)
+            {
+                for (int y = 0; y < board.GetLength(1); y++)
+                { 
+                    if(board[x, y] != null)
+                    {
+
+                        ChessPiece temp = board[x, y];
+                        System.Console.WriteLine("inne i posx lista: " + posxlist[0]);
+                    }
+                }
+            }
+
+
+                    return board;
         }
 
         //writes the current gamefield to a xmlfile
@@ -92,10 +114,10 @@ namespace Chess2._0
         from ChessPiece in listan
 
         
-        select new XElement("ChessPiece", new XAttribute("posX", ChessPiece.posX),
-                                          new XAttribute("posY", ChessPiece.posY), 
-                                          new XAttribute("color", ChessPiece.Color), 
-                                          new XAttribute("type", ChessPiece.GetType())
+        select new XElement("ChessPiece", new XElement("posX", ChessPiece.posX),
+                                          new XElement("posY", ChessPiece.posY), 
+                                          new XElement("color", ChessPiece.Color), 
+                                          new XElement("type", ChessPiece.GetType())
 
         )));
             xmlDoc.Save(@".\chessdata\chessdata.xml");
@@ -106,6 +128,10 @@ namespace Chess2._0
             Player pleyer = new HumanPlayer("white");
 
             return pleyer;
+        }
+        public void removeFile()
+        {
+            File.Delete(@".\chessdata\chessdata.xml");
         }
     }
 }
