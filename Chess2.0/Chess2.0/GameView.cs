@@ -14,6 +14,7 @@ namespace Chess2._0
         Player playerwhite = new HumanPlayer("white");
         RulesEngine rules;
         String _gamestatus = "white";
+        DataStorage ds = new DataStorage();
         public String gamestatus
         {
             get { return _gamestatus; }
@@ -61,6 +62,7 @@ namespace Chess2._0
                // window.updateBoard(move);
                 board.updateTable(move);
                 window.updateTable();
+                ds.SaveData(board.get());
                 
 
 
