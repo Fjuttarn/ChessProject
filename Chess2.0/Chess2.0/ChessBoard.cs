@@ -17,7 +17,7 @@ namespace Chess2._0
         {
             if (File.Exists(@".\chessdata\chessdata.xml"))
             {
-                //board = ds.LoadData();
+                board = ds.LoadData();
                 ds.SaveData(board);
             }
             else
