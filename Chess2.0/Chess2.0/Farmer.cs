@@ -8,12 +8,12 @@ namespace Chess2._0
 {
    public class Farmer : ChessPiece
     {
-        public Farmer(Player p, int posX, int posY) : base(p, posX, posY) { }
+        public Farmer(string color, int posX, int posY) : base(color, posX, posY) { }
 
         public override Boolean isValidMove(Move move)
         {
             //Check if the move is valid for white pieces
-            if (player is HumanPlayer)
+            if (color == "white")
             {
                 if (move.gettoY() - move.getfromY() == 2 && move.gettoX() == move.getfromX() && move.getfromY() == 1)
                     
@@ -32,7 +32,7 @@ namespace Chess2._0
             }
 
             //Check if the move is valid for black pieces
-            if (player is CPUPlayer)
+            if (color == "black")
             {
                 if (move.gettoY() - move.getfromY() == -2 && move.gettoX() == move.getfromX() 
                     && move.getfromY() == 6)

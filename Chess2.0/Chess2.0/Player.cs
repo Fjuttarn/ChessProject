@@ -8,18 +8,18 @@ namespace Chess2._0
 {
     public partial class Player
     {
-        private string colour;
+        private string color;
 
-        public Player(String colour)
+        public Player(String color)
         {
-            this.colour = colour;
+            this.color = color;
         }
 
-        public String getColour
+        public String Color
         {
             get
             {
-                return colour;
+                return color;
             }
         }
         public virtual void setupAI(ChessBoard chessboard, GameView gw) { }

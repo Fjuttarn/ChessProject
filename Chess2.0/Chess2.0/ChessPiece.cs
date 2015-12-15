@@ -10,13 +10,13 @@ namespace Chess2._0
     {
         protected int positionX;
         protected int positionY;
-        protected Player player;
+        protected string color;
 
-        protected ChessPiece(Player p, int posX, int posY)
+        protected ChessPiece(string color, int posX, int posY)
         {
             positionX = posX;
             positionY = posY;
-            player = p;
+            this.color = color;
         }
 
         public int posX
@@ -42,11 +42,11 @@ namespace Chess2._0
             }
         }
 
-        public Player getPlayer
+        public string Color
         {
             get
             {
-                return player;
+                return color;
             }
         }
 

@@ -244,7 +244,7 @@ namespace Chess2._0
                     if (board.get()[x, y] != null)
                     {
                         ChessPiece temp = board.get()[x, y];
-                        if (temp.getPlayer.getColour != king.getPlayer.getColour)
+                        if (temp.Color != king.Color)
                         {
                             Move move = new Move(x, y, king.posX, king.posY);//move som går till motståndarens kung position
                             if (isValid(move, board.colourOfPiece(move)))

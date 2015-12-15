@@ -8,7 +8,7 @@ namespace Chess2._0
 {
    public class King : ChessPiece
     {
-        public King(Player p, int posX, int posY) : base(p, posX, posY) { }
+        public King(string color, int posX, int posY) : base(color, posX, posY) { }
 
         public override Boolean isValidMove(Move move)
         {

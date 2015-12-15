@@ -8,7 +8,7 @@ namespace Chess2._0
 {
    public class Runner : ChessPiece
     {
-        public Runner(Player p, int posX, int posY) : base(p, posX, posY) {}
+        public Runner(string color, int posX, int posY) : base(color, posX, posY) {}
         
         public override Boolean isValidMove(Move move)
         {

@@ -8,7 +8,7 @@ namespace Chess2._0
 {
     public class HumanPlayer : Player
     {
-        public HumanPlayer(String colour) : base(colour) { }
+        public HumanPlayer(String color) : base(color) { }
 
       /*  public String getCoulur
         {

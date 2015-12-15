@@ -124,7 +124,7 @@ namespace Chess2._0
                     if (board[x, y] != null)
                     {
                         ChessPiece current = board[x, y];
-                        string color = current.getPlayer.getColour;
+                        string color = current.Color;
 
                         if (current is Farmer)
                         {

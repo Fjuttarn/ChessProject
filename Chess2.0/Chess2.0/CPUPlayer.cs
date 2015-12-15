@@ -16,7 +16,7 @@ namespace Chess2._0
         ArrayList myPieces = new ArrayList();
         ArrayList enemyPieces = new ArrayList();
 
-        public CPUPlayer(String colour) : base(colour) { }
+        public CPUPlayer(String color) : base(color) { }
         
         public override void setupAI(ChessBoard chessboard, GameView gw)
         {
@@ -37,7 +37,7 @@ namespace Chess2._0
                     if (board[fromx, fromy] != null)
                     {
                         ChessPiece current = board[fromx, fromy];
-                        if (board[fromx, fromy].getPlayer.getColour != this.getColour)//det är vår spelare
+                        if (board[fromx, fromy].Color != this.Color)//det är vår spelare
                         {
                             enemyPieces.Add(current);
                         }
@@ -152,7 +152,7 @@ namespace Chess2._0
             if (board[toX, toY] is King)//det är en kung
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, this.getColour))
+                if (rules.isValid(move, this.Color))
                 {
                     return true;
                 }
@@ -167,7 +167,7 @@ namespace Chess2._0
             if (board[toX, toY] is Queen)//det är en queen
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, this.getColour))
+                if (rules.isValid(move, this.Color))
                 {
                     return true;
                 }
@@ -181,7 +181,7 @@ namespace Chess2._0
             if (board[toX, toY] is Tower || board[toX, toY] is Runner || board[toX, toY] is Horse)//det är en horse, runner eller tower
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, this.getColour))
+                if (rules.isValid(move, this.Color))
                 {
                     return true;
                 }
@@ -196,7 +196,7 @@ namespace Chess2._0
             if (board[toX, toY] is Farmer)
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, this.getColour))
+                if (rules.isValid(move, this.Color))
                 {
                     return true;
                 }
@@ -216,7 +216,7 @@ namespace Chess2._0
                     for (int toy = 0; toy < board.GetLength(1); toy++)
                     {
                         Move move = new Move(myPiece.posX, myPiece.posY, tox, toy);
-                        if (rules.isValid(move, this.getColour))
+                        if (rules.isValid(move, this.Color))
                         {
                             validMoves.Add(move);
                         }

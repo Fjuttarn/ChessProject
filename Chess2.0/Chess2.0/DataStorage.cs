@@ -38,10 +38,17 @@ namespace Chess2._0
 
         new XElement("ChessPieces",
         from ChessPiece in listan
-        select new XElement("ChessPiece", new XAttribute("posX", ChessPiece.posX), new XAttribute("posY", ChessPiece.posY), new XAttribute("color", ChessPiece.getPlayer.getColour)
+        select new XElement("ChessPiece", new XAttribute("posX", ChessPiece.posX), new XAttribute("posY", ChessPiece.posY), new XAttribute("color", ChessPiece.Color)
 
         )));
             xmlDoc.Save(@".\chessdata\chessdata.xml");
+        }
+
+        public Player LoadPlayerBlack()
+        {
+            Player pleyer = new HumanPlayer("white");
+
+            return pleyer;
         }
     }
 }

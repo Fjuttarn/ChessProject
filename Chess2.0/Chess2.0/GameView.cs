@@ -21,7 +21,7 @@ namespace Chess2._0
             set
             {
                 _gamestatus = value;
-                if(_gamestatus == "black")
+                if(_gamestatus == "black" && playerblack is CPUPlayer)
                 {
                     playerblack.AImove();
                 }
@@ -35,7 +35,7 @@ namespace Chess2._0
             this.window = window;
 
             playerblack = new CPUPlayer("black");
-            board = new ChessBoard(playerwhite, playerblack);
+            board = new ChessBoard();
             rules = new RulesEngine(board);
             playerblack.setupAI(board, this);
             window.setBoard(board.get());
