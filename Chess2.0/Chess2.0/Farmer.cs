@@ -12,7 +12,7 @@ namespace Chess2._0
 
         public override Boolean isValidMove(Move move)
         {
-            //Check if the move is valid for white pieces
+            //Kollar om draget är godkänt för en vit bonde
             if (color == "white")
             {
                 if (move.gettoY() - move.getfromY() == 2 && move.gettoX() == move.getfromX() && move.getfromY() == 1)
@@ -31,7 +31,7 @@ namespace Chess2._0
                 }
             }
 
-            //Check if the move is valid for black pieces
+            //Kollar om draget är godkänt för en svart bonde
             if (color == "black")
             {
                 if (move.gettoY() - move.getfromY() == -2 && move.gettoX() == move.getfromX() 

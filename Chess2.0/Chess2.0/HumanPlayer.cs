@@ -10,12 +10,5 @@ namespace Chess2._0
     {
         public HumanPlayer(String color) : base(color) { }
 
-      /*  public String getCoulur
-        {
-            get
-            {
-                return base.getColour;
-            }
-        }*/
     }
 }

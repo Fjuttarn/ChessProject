@@ -11,8 +11,10 @@ namespace Chess2._0
     {
         private ChessPiece[,] board = new ChessPiece[8, 8];
         DataStorage ds = new DataStorage();
+
         public ChessBoard()
         {
+            //Om det finns ett sparat spel, läs in det
             if (File.Exists(@".\chessdata\chessdata.xml"))
             {
                 this.board = ds.LoadData();
@@ -20,7 +22,7 @@ namespace Chess2._0
             }
             else
             {
-                //all white pieces
+                //Skapar vita pjäser
                 ChessPiece whiteKing = new King("white", 3, 0);
                 ChessPiece whiteQueen = new Queen("white", 4, 0);
                 ChessPiece whiteRunner1 = new Runner("white", 2, 0);
@@ -38,7 +40,7 @@ namespace Chess2._0
                 ChessPiece whiteFarmer7 = new Farmer("white", 6, 1);
                 ChessPiece whiteFarmer8 = new Farmer("white", 7, 1);
 
-                //all black pieces
+                //Skapar svarta pjäser
                 ChessPiece blackKing = new King("black", 4, 7);
                 ChessPiece blackQueen = new Queen("black", 3, 7);
                 ChessPiece blackRunner1 = new Runner("black", 2, 7);
@@ -56,7 +58,7 @@ namespace Chess2._0
                 ChessPiece blackFarmer7 = new Farmer("black", 6, 6);
                 ChessPiece blackFarmer8 = new Farmer("black", 7, 6);
 
-                //add all chesspieces to twodimensional array
+                //Lägg till pjäser i tvådimensionell array som representerar schackbrädet
                 board[3, 0] = whiteKing;
                 board[4, 0] = whiteQueen;
                 board[2, 0] = whiteRunner1;
@@ -94,12 +96,13 @@ namespace Chess2._0
                 ds.SaveData(board);
             }
         }
+
         public ChessPiece[,] get()
         {
             return board;
         }
 
-        //Updaterar den brädet (arrayen) efter att ett drag genomförts
+        //Updaterar brädet (arrayen) efter att ett drag genomförts
         public void updateTable(Move move)
         {
             board[move.gettoX(), move.gettoY()] = board[move.getfromX(), move.getfromY()];
@@ -108,6 +111,7 @@ namespace Chess2._0
             board[move.gettoX(), move.gettoY()].posY = move.gettoY();
         }
 
+        //Kollar om någon av kungarna har blivit utslagen
         public bool isKingDead(String gameStatus)
         {
             for (int x = 0; x < board.GetLength(0); x++)
@@ -117,7 +121,6 @@ namespace Chess2._0
                     if (board[x, y] != null)
                     {
                         ChessPiece temp = board[x, y];
-
 
                         if (gameStatus.Equals("white"))
                         {
@@ -138,6 +141,7 @@ namespace Chess2._0
             }
             return true;
         }
+
         //1. Egen pjäs
         //2. Motståndares pjäs
         //3. Tom ruta
@@ -161,6 +165,7 @@ namespace Chess2._0
             return 3;
         }
 
+        //Returnerar färgen på pjäsen som flyttas
         public string colourOfPiece(Move move)
         {
             if (board[move.getfromX(), move.getfromY()] != null)

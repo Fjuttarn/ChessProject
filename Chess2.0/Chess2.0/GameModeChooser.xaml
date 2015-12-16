@@ -1,0 +1,15 @@
+﻿<Window x:Class="Chess2._0.GameModeChooser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chess2._0"
+        mc:Ignorable="d"
+        Title="Chess" Height="440" Width="400">
+    <Grid Background="Brown">
+        <Button x:Name="singleplayer" Background="Beige" Content="Singleplayer" HorizontalAlignment="Left" Margin="106,120,0,0" VerticalAlignment="Top" Width="180" Click="singleplayer_Click" Height="50"/>
+        <Button x:Name="multiplayer" Background="Beige" Content="Multiplayer" HorizontalAlignment="Left" Margin="106,175,0,0" VerticalAlignment="Top" Width="180" Click="multiplayer_Click" Height="50"/>
+        <Label x:Name="label" Content="Mode" HorizontalAlignment="Left" Margin="106,50,0,0" VerticalAlignment="Top" FontFamily="Goudy Stout" FontSize="32" Width="180"/>
+
+    </Grid>
+</Window>

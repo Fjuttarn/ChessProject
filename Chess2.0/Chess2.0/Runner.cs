@@ -10,6 +10,7 @@ namespace Chess2._0
     {
         public Runner(string color, int posX, int posY) : base(color, posX, posY) {}
         
+        //Kollar om ett drag är tillåtet för en springare
         public override Boolean isValidMove(Move move)
         {
             if(Math.Abs(move.gettoX() - move.getfromX()) == Math.Abs(move.gettoY() - move.getfromY()))

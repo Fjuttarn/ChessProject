@@ -32,9 +32,9 @@ namespace Chess2._0
             return false;
         }
 
+        //Kollar om draget är tillåtet enligt reglerna
         public bool isLeagalMove(Move move)
-        {//1 egen pjäs, 2 enemy pjäs, 3 tom ruta
-            
+        {          
             ChessPiece current = board.get()[move.getfromX(), move.getfromY()];
             
             if (current is Horse)
@@ -72,6 +72,7 @@ namespace Chess2._0
             }
         }
 
+        //Kollar om ett diagonalt drag är godkänt
         public bool checkDiagonal(Move move)
         {
             int y = move.getfromY();
@@ -158,11 +159,9 @@ namespace Chess2._0
             return false;
         }
 
-        //1=egen pjäs
-        //2=motståndare
-        //3=tom ruta
+        //Kollar om ett vertikalt drag är tillåtet
         public bool checkVertical(Move move)
-        {//kolla om det går att hoppa över skaer''
+        {//kolla om det går att hoppa över skaer
             if (move.getfromY() < move.gettoY())
             {
                 for (int y = move.getfromY() + 1; y <= move.gettoY(); y++)
@@ -198,6 +197,7 @@ namespace Chess2._0
             return false;
         }
 
+        //Kollar om ett horisontellt drag är tillåtet
         public bool checkHorizontal(Move move)
         {
             if (move.getfromX() < move.gettoX())
@@ -232,52 +232,6 @@ namespace Chess2._0
                 return true;
             }
             return false;
-        }
-
-        //kollar om kungen står i check
-        public bool isCheck(King king)
-        {
-            for (int x = 0; x < board.get().GetLength(0); x++)
-            {
-                for (int y = 0; y < board.get().GetLength(1); y++)
-                {
-                    if (board.get()[x, y] != null)
-                    {
-                        ChessPiece temp = board.get()[x, y];
-                        if (temp.Color != king.Color)
-                        {
-                            Move move = new Move(x, y, king.posX, king.posY);//move som går till motståndarens kung position
-                            if (isValid(move, board.colourOfPiece(move)))
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        public bool isCheckMate(King king)
-        {
-            King tempKing = king;
-            int posX = king.posX;
-            int posY = king.posY;
-            for (int x = 0; x < board.get().GetLength(0); x++)
-            {
-                for (int y = 0; y < board.get().GetLength(1); y++)
-                {
-                    Move move = new Move(posX, posY, x, y);
-                    tempKing.posX = x;
-                    tempKing.posY = y;
-                    if (isValid(move, board.colourOfPiece(move)) && !isCheck(tempKing))
-                    {
-                        return false;
-                    }
-                }
-            }
-            System.Console.WriteLine("DET BLEV SCHACK MATT!!");
-            return true;
         }
     }
 }

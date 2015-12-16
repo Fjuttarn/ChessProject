@@ -10,6 +10,7 @@ namespace Chess2._0
     {
         public Tower(string color, int posX, int posY) : base(color, posX, posY) {}
    
+        //Kollar om ett drag är tillåtet för ett torn
         public override Boolean isValidMove(Move move)
         {
             if(move.gettoY() == move.getfromY() || move.gettoX() == move.getfromX())

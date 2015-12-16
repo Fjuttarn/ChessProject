@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Chess2._0"
         mc:Ignorable="d"
        x:Name="root" 
-        Title="MainWindow" Height="440" Width="400">
+        Title="Chess" Height="440" Width="400">
     <Window.Resources>
         <ResourceDictionary>
             <ImageSource x:Key="Empty">images/Empty.png</ImageSource>

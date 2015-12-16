@@ -18,6 +18,7 @@ namespace Chess2._0
 
         public CPUPlayer(String color) : base(color) { }
         
+        //Instantierar objekt som AI-spelaren behöver för att fungera
         public override void setupAI(ChessBoard chessboard, GameView gw)
         {
             this.chessboard = chessboard;
@@ -26,6 +27,8 @@ namespace Chess2._0
             this.gw = gw;
 
         }
+
+        //Uppdaterar AI-spelarens listor över pjäser
         public void updateLists()
         {
             myPieces.Clear();
@@ -51,6 +54,7 @@ namespace Chess2._0
             }
         }
 
+        //AI-spelaren gör ett drag
         public override void AImove()
         {
             this.board = chessboard.get();
@@ -224,14 +228,9 @@ namespace Chess2._0
                 }
             }
 
-            System.Console.WriteLine("mina pjäser: " + myPieces.Count);
-
-            System.Console.WriteLine("enemy pjäser: " + enemyPieces.Count);
             Random rnd = new Random();
             int rng = rnd.Next(0, validMoves.Count); //slumpar fram ett move
             Move rngMove = validMoves[rng] as Move;
-            System.Console.WriteLine(rng);
-            System.Console.WriteLine("fromX " + rngMove.getfromX() + "fromY: " + rngMove.getfromY() + "tox: " + rngMove.gettoX() + " toY: " + rngMove.gettoY());
             gw.makeMove(rngMove.getfromX(), rngMove.getfromY(), rngMove.gettoX(), rngMove.gettoY());
 
         }

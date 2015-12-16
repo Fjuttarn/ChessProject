@@ -20,8 +20,7 @@ namespace Chess2._0
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        private ChessPiece[,] board;
+        ChessPiece[,] board;
         int[] move = new int[4];
         bool firstClick = true;
         Image[] piecesToUpdate = new Image[2];
@@ -32,6 +31,7 @@ namespace Chess2._0
             InitializeComponent();
             updateTable();
         }
+
         public void setBoard(ChessPiece[,] board)
         {
             this.board = board;
@@ -39,12 +39,15 @@ namespace Chess2._0
 
         public Action<int[]> onMoveCompleted { get; set; }
 
+        //Kallas på om en kung är utslagen
         public void gameOver(string gamestatus)
         {
             MessageBox.Show(gamestatus);
-            System.Environment.Exit(1);
+            Chess chess = new Chess(this);
+            updateTable();
         }
 
+        //Kallas på när en spelare klickar på en ruta i schackbrädet
         private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Border clickedSquare;
@@ -63,33 +66,31 @@ namespace Chess2._0
                 firstClick = false;
                 clickedSquare.BorderThickness = new Thickness(5);
                 clickedSquare.BorderBrush = new SolidColorBrush(Colors.Yellow);
-                // MessageBox.Show("X: " + move[0] + "Y: " + move[1]);
             }
             else if (!firstClick)
             {
                 piecesToUpdate[1] = c;
                 move[3] = row;
                 move[2] = col;
-                //MessageBox.Show("X: " + move[2] + "Y: " + move[3]);
                 firstClick = true;
                 clickedSquare = getBorder(move[0], move[1]);
                 clickedSquare.ClearValue(Border.BorderThicknessProperty);
                 clickedSquare.ClearValue(Border.BorderBrushProperty);
-                //notify subscribers
+                
+                //Meddelar subscribers om att ett drag har gjorts
                 Action<int[]> change = onMoveCompleted;
                 if (change != null)
                 {
                     change(move);
                 }
-            }
+             }
 
             }
-            catch (ArgumentNullException)
-            {
 
-            }
+            catch (ArgumentNullException){}
         }
 
+        //Returnerar ramen för rutan på den specificerade positionen
         public Border getBorder(int x, int y)
         {
             Border border = (Border)TheGrid.Children.Cast<UIElement>().
@@ -97,18 +98,7 @@ namespace Chess2._0
             return border;
         }
 
-        public void updateBoard(Move move)
-        {
-            /*Image someImage = piecesToUpdate[0];
-            someImage.SetValue(Grid.ColumnProperty, move[3]);
-            someImage.SetValue(Grid.RowProperty, move[2]);
-            TheGrid.Children.Add(someImage);*/
-
-            piecesToUpdate[1].Source = piecesToUpdate[0].Source;
-            piecesToUpdate[0].Source = (ImageSource)FindResource("Empty");
-            //piecesToUpdate[0].
-
-        }
+        //Uppdaterar pjäsernas positioner
         public void updateTable()
         {
             try
@@ -122,7 +112,6 @@ namespace Chess2._0
             {
                 for (int y = 0; y < this.board.GetLength(1); y++)
                 {
-
                     Image img = new Image();
                     Uri uri = new Uri(@".\images\Empty.png", UriKind.Relative);
 
@@ -162,8 +151,6 @@ namespace Chess2._0
                     Grid.SetColumn(img, x);
                     Grid.SetRow(img, y);
                     TheGrid.Children.Add(img);
-
-
                 }
             }
 
@@ -175,14 +162,15 @@ namespace Chess2._0
             TheGrid.Children.Add(img2);
 
         }
+
+        //Målar schackbrädet (rutorna)
         public void paintTable()
         {
             SolidColorBrush defaultBrush = new SolidColorBrush(Colors.Brown);
             SolidColorBrush alternateBrush = new SolidColorBrush(Colors.Beige);
             
             for (int x = 0; x < this.board.GetLength(0); x++)
-            {
-         
+            {       
                 for (int y = 0; y < this.board.GetLength(1); y++)
                 {
                     Border cell = new Border();
@@ -194,13 +182,9 @@ namespace Chess2._0
                     }
                     Grid.SetColumn(cell, x);
                     Grid.SetRow(cell, y);
-                    System.Console.WriteLine("varv");
                     TheGrid.Children.Add(cell);
                 }
             }
-           
-
         }
-
     }
 }

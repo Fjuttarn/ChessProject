@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Chess2._0
 {
@@ -10,11 +11,12 @@ namespace Chess2._0
     {
         MainWindow window;
         ChessBoard board;
+        Player playerwhite;
         Player playerblack;
-        Player playerwhite = new HumanPlayer("white");
         RulesEngine rules;
-        String _gamestatus = "white";
+        string _gamestatus = "white";
         DataStorage ds = new DataStorage();
+
         public String gamestatus
         {
             get { return _gamestatus; }
@@ -25,79 +27,71 @@ namespace Chess2._0
                 {
                     playerblack.AImove();
                 }
+
             }
         }
-
-
 
         public GameView(MainWindow window)
         {
             this.window = window;
-
-            playerblack = new CPUPlayer("black");
-            board = new ChessBoard();
-            rules = new RulesEngine(board);
-            playerblack.setupAI(board, this);
-            window.setBoard(board.get());
-
-           // window.updateTable();
         }
+
+        //Initierar spelare utifrån vad som har valts i menyerna
+        public void GameSetup(string gamemode, bool isNewGame)
+        {
+            if (isNewGame)
+            {
+                ds.removeFile();
+            }
+
+            board = new ChessBoard();
+
+            if (gamemode == "singleplayer")
+            {
+                playerwhite = new HumanPlayer("white");
+                playerblack = new CPUPlayer("black");
+                playerblack.setupAI(board, this);
+            }
+            else if(gamemode == "multiplayer")
+            {
+                playerwhite = new HumanPlayer("white");
+                playerblack = new HumanPlayer("black");
+            }
+ 
+            rules = new RulesEngine(board);
+            window.setBoard(board.get());
+        }
+
+        //Lyssnar efter gjorda drag i ui
         public void onMoveCompleted (int[] newMove)
         {
             makeMove(newMove[0], newMove[1], newMove[2], newMove[3]);
         }
 
-        public void run()
-        {
-            System.Console.WriteLine(gamestatus + " turn.");
-            System.Console.WriteLine("Game ended. " + gamestatus);
-        }
-
         //Kallas på efter att en player försöker göra ett drag för att se till att det är giltigt
         public void makeMove(int fromX, int fromY, int toX, int toY)
-        {
-            
+        {         
             Move move = new Move(fromX, fromY, toX, toY);
             
             if (rules.isValid(move, gamestatus))
             {
-               // window.updateBoard(move);
                 board.updateTable(move);
                 window.updateTable();
                 ds.SaveData(board.get());
-                
 
-
-                System.Console.WriteLine(gamestatus + " turn");
-
+                //Kollar om kungen blev utslagen
                 if (board.isKingDead(gamestatus))
                 {
                     gamestatus = gamestatus + " player won, Game Over!";
                     ds.removeFile();
                     window.gameOver(gamestatus);
                 }
+
                 switchTurn();
             }
-       
-            /*
-            if (rules.isCheck(board.getWhiteKing()))
-            {
-                if (rules.isCheckMate(board.getWhiteKing()))
-                {
-                    gamestatus = "Black wins!";
-                }
-
-            }
-            else if (rules.isCheck(board.getBlackKing()))
-            {
-                if (rules.isCheckMate(board.getBlackKing()))
-                {
-                    gamestatus = "White wins!";
-                }
-            }
-            */
         }
 
+        //Byter gamestatus beroende på vems tur det är
         public void switchTurn()
         {
             if(gamestatus.Equals("white"))

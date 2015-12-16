@@ -20,23 +20,28 @@ namespace Chess2._0
             this.toX = toX;
             this.toY = toY;
         }
+
         public int getfromX()
         {
             return fromX;
         }
+
         public int getfromY()
         {
             return fromY;
         }
+
         public int gettoX()
         {
             return toX;
         }
+
         public int gettoY()
         {
             return toY;
         }
 
+        //Kollar om ett drag är horisontellt
         public bool isHorizontal()
         {
             if(fromY == toY)
@@ -47,6 +52,7 @@ namespace Chess2._0
             return false;
         }
 
+        //Kollar om ett drag är vertikalt
         public bool isVertical()
         {
             if(fromX == toX)
@@ -57,6 +63,7 @@ namespace Chess2._0
             return false;
         }
 
+        //Kollar om ett drag är diagonalt
         public bool isDiagonal()
         {
             if(fromX != toX && fromY != toY)

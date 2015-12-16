@@ -10,6 +10,7 @@ namespace Chess2._0
     {
         public Horse(string color, int posX, int posY) : base(color, posX, posY) {}
 
+        //Kollar om draget är godkänt för en häst
         public override Boolean isValidMove(Move move)
         {
             if(move.getfromY() - move.gettoY() == 2 || move.getfromY() - move.gettoY() == -2)

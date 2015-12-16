@@ -50,6 +50,8 @@ namespace Chess2._0
             }
         }
 
+        //Kollar om pjäsen får röra sig på ett visst sätt
+        //De olika pjäserna skriver över denna metod med sina egna regler
         public abstract Boolean isValidMove(Move move);
     }
 }
