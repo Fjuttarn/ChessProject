@@ -15,10 +15,8 @@ namespace Chess2._0
             //Kollar om draget är godkänt för en vit bonde
             if (color == "white")
             {
-                if (move.gettoY() - move.getfromY() == 2 && move.gettoX() == move.getfromX() && move.getfromY() == 1)
-                    
                 if (move.gettoY() - move.getfromY() == 2 && move.gettoX() == move.getfromX() 
-                    && move.getfromY() == 1)
+                    && move.getfromY() == 1)//Ok att gå två steg fram från startposition
                 {
                     return true;
                 }
@@ -35,7 +33,7 @@ namespace Chess2._0
             if (color == "black")
             {
                 if (move.gettoY() - move.getfromY() == -2 && move.gettoX() == move.getfromX() 
-                    && move.getfromY() == 6)
+                    && move.getfromY() == 6)//Ok att gå två steg fram från startposition
                 {
                     return true;
                 }

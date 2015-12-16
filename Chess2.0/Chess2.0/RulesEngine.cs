@@ -233,6 +233,53 @@ namespace Chess2._0
             }
             return false;
         }
+
+        //kollar om kungen står i check
+        public bool isCheck(King king)
+        {
+            for (int x = 0; x < board.get().GetLength(0); x++)
+            {
+                for (int y = 0; y < board.get().GetLength(1); y++)
+                {
+                    if (board.get()[x, y] != null)
+                    {
+                        ChessPiece temp = board.get()[x, y];
+                        if (temp.Color != king.Color)
+                        {
+                            Move move = new Move(x, y, king.posX, king.posY);//move som går till motståndarens kung position
+                            if (isValid(move, board.colourOfPiece(move)))
+                            {
+                                return true;
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+            return false;
+        }
+
+        public bool isCheckMate(King king)
+        {
+
+            int posX = king.posX;
+            int posY = king.posY;
+            for (int x = 0; x < board.get().GetLength(0); x++)
+            {
+                for (int y = 0; y < board.get().GetLength(1); y++)
+                {
+                    Move move = new Move(posX, posY, x, y);
+                    if (isValid(move, board.colourOfPiece(move)) && !isCheck(king))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
     }
 }
 

@@ -123,5 +123,21 @@ namespace Chess2._0
                 gamestatus = "white";
             }
         }
+        /*
+         if (rules.isCheck(board.getWhiteKing()))
+            {
+                if (rules.isCheckMate(board.getWhiteKing()))
+                {
+                    gamestatus = "Black wins!";
+                }
+            }
+            else if (rules.isCheck(board.getBlackKing()))
+            {
+                if (rules.isCheckMate(board.getBlackKing()))
+                {
+                    gamestatus = "White wins!";
+                }
+            }
+    */
     }
 }
