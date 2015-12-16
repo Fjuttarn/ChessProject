@@ -21,8 +21,17 @@ namespace Chess2._0
             gmc.ShowDialog();
             string gamemode = gmc.GameMode;
 
+            string color = "";
+
+            if(gamemode == "singleplayer")
+            {
+                ChooseColor choosecol= new ChooseColor();
+                choosecol.ShowDialog();
+                color = choosecol.Color;
+            }
+
             this.gw = new GameView(mw);
-            gw.GameSetup(gamemode, isNewGame);
+            gw.GameSetup(gamemode, isNewGame, color);
             //Sätter GameView till subscriber av knapptryck i ui
             mw.onMoveCompleted += gw.onMoveCompleted;
         }

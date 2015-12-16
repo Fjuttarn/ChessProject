@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChooseColor.xaml.cs">
+      <DependentUpon>ChooseColor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataStorage.cs" />
     <Compile Include="GameModeChooser.xaml.cs">
       <DependentUpon>GameModeChooser.xaml</DependentUpon>
@@ -66,6 +69,10 @@
       <DependentUpon>StartMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tower.cs" />
+    <Page Include="ChooseColor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="GameModeChooser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

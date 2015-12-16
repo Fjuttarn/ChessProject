@@ -27,9 +27,8 @@ namespace Chess2._0
 
         public MainWindow()
         {
-            Chess chess = new Chess(this);
             InitializeComponent();
-            updateTable();
+            Chess chess = new Chess(this);
         }
 
         public void setBoard(ChessPiece[,] board)
