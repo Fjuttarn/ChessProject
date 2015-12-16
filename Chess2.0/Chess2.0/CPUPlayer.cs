@@ -54,8 +54,10 @@ namespace Chess2._0
         }
 
         //AI-spelaren gör ett drag
-        public override void AImove()
+        public async override void AImove()
         {
+            await Task.Delay(500);
+
             this.board = chessboard.get();
             updateLists();
             Move bestMove = findBestMove();
