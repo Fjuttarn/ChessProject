@@ -65,17 +65,6 @@ namespace Chess2._0
                 }
             }
 
-            for (int x = 0; x < board.GetLength(0); x++)
-            {
-                for (int y = 0; y < board.GetLength(1); y++)
-                { 
-                    if(board[x, y] != null)
-                    {
-                        ChessPiece temp = board[x, y];
-                    }
-                }
-            }
-
             return board;
         }
 
