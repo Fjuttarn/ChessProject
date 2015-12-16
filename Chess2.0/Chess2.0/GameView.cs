@@ -14,7 +14,7 @@ namespace Chess2._0
         Player playerwhite;
         Player playerblack;
         RulesEngine rules;
-        string _gamestatus = "white";
+        string _gamestatus;
         DataStorage ds = new DataStorage();
 
         public String gamestatus
@@ -27,7 +27,10 @@ namespace Chess2._0
                 {
                     playerblack.AImove();
                 }
-
+                if(_gamestatus == "white" && playerwhite is CPUPlayer)
+                {
+                    playerwhite.AImove();
+                }
             }
         }
 
@@ -37,7 +40,7 @@ namespace Chess2._0
         }
 
         //Initierar spelare utifrån vad som har valts i menyerna
-        public void GameSetup(string gamemode, bool isNewGame)
+        public void GameSetup(string gamemode, bool isNewGame, string color)
         {
             if (isNewGame)
             {
@@ -48,9 +51,20 @@ namespace Chess2._0
 
             if (gamemode == "singleplayer")
             {
-                playerwhite = new HumanPlayer("white");
-                playerblack = new CPUPlayer("black");
-                playerblack.setupAI(board, this);
+                switch (color)
+                {
+                    case "white":
+                        playerwhite = new HumanPlayer("white");
+                        playerblack = new CPUPlayer("black");
+                        playerblack.setupAI(board, this);
+                        break;
+
+                    case "black":
+                        playerwhite = new CPUPlayer("white");
+                        playerblack = new HumanPlayer("black");
+                        playerwhite.setupAI(board, this);
+                        break;
+                }             
             }
             else if(gamemode == "multiplayer")
             {
@@ -60,12 +74,18 @@ namespace Chess2._0
  
             rules = new RulesEngine(board);
             window.setBoard(board.get());
+            window.updateTable();
+            gamestatus = "white";
         }
 
         //Lyssnar efter gjorda drag i ui
         public void onMoveCompleted (int[] newMove)
         {
-            makeMove(newMove[0], newMove[1], newMove[2], newMove[3]);
+            if (playerwhite is HumanPlayer && gamestatus == "white" ||
+                playerblack is HumanPlayer && gamestatus == "black")
+            {
+                makeMove(newMove[0], newMove[1], newMove[2], newMove[3]);
+            }
         }
 
         //Kallas på efter att en player försöker göra ett drag för att se till att det är giltigt
