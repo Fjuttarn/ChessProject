@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Chess2._0
 {
-   public class CPUPlayer : Player
+    public class CPUPlayer : Player
     {
         GameView gw;
         RulesEngine rules;
@@ -17,7 +17,7 @@ namespace Chess2._0
         ArrayList enemyPieces = new ArrayList();
 
         public CPUPlayer(String color) : base(color) { }
-        
+
         //Instantierar objekt som AI-spelaren behöver för att fungera
         public override void setupAI(ChessBoard chessboard, GameView gw)
         {
@@ -44,11 +44,10 @@ namespace Chess2._0
                         {
                             enemyPieces.Add(current);
                         }
-                        else 
+                        else
                         {
                             myPieces.Add(current);
                         }
-
                     }
                 }
             }
@@ -59,94 +58,55 @@ namespace Chess2._0
         {
             this.board = chessboard.get();
             updateLists();
-            int index = findBestMove();
-
-            if (index == 5)
-            {
-                randomizeMove();
-            }
-            else
-            {
-                foreach (ChessPiece myPiece in myPieces)
-                {
-                    foreach (ChessPiece enemyPiece in enemyPieces)
-                    {
-                        switch (index)
-                        {
-                            case 1:
-                                if (canTakeKing(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY))
-                                {
-                                    gw.makeMove(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY);
-                                }
-                                break;
-
-                            case 2:
-                                if (canTakeQueen(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY))
-                                {
-                                    gw.makeMove(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY);
-                                }
-                                break;
-
-                            case 3:
-                                if (canTakeHorseRunnerTower(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY))
-                                {
-                                    gw.makeMove(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY);
-                                }
-                                break;
-
-                            case 4:
-                                if (canTakeFarmer(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY))
-                                {
-                                    gw.makeMove(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY);
-                                }
-                                break;
-                        }
-                    }
-                }
-            }
+            Move bestMove = findBestMove();
+            gw.makeMove(bestMove.getfromX(), bestMove.getfromY(), bestMove.gettoX(), bestMove.gettoY());
         }
 
-        //hittar det bästa movet
-        //1 om den kan ta kung
-        //2 om det kan ta queen
-        //3 om det kan ta runner, tower eller hórse
-        //4 om den kan ta en bonde
-        //5 om den inte kan ta ngt
-        public int findBestMove()
+        //Hittar ett bra move
+        public Move findBestMove()
         {
             bool king = false;
             bool queen = false;
             bool horseRunnerTower = false;
             bool farmer = false;
+            Move kingmove = null;
+            Move queenmove = null;
+            Move horseRunnerTowermove = null;
+            Move farmermove = null;
 
             //hämtar våra from kordinater
             foreach (ChessPiece myPiece in myPieces)
             {
+                //Hämtar to kordinater
                 foreach (ChessPiece enemyPiece in enemyPieces)
                 {
                     if (canTakeKing(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY))
                     {
                         king = true;//det går att ta kungen!
+                        kingmove = new Move(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY);
                     }
                     else if (canTakeQueen(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY))
                     {
                         queen = true;//det går att ta queen!
+                        queenmove = new Move(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY);
                     }
                     else if (canTakeHorseRunnerTower(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY))
                     {
                         horseRunnerTower = true;//det går att ta horse, runner eller tower
+                        horseRunnerTowermove = new Move(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY);
                     }
                     else if (canTakeFarmer(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY))
                     {
                         farmer = true;//det går att ta en farmer
+                        farmermove = new Move(myPiece.posX, myPiece.posY, enemyPiece.posX, enemyPiece.posY);
                     }
                 }
             }
-            if (king) return 1;
-            else if (queen) return 2;
-            else if (horseRunnerTower) return 3;
-            else if (farmer) return 4;
-            else return 5;
+            if (king) return kingmove;
+            else if (queen) return queenmove;
+            else if (horseRunnerTower) return horseRunnerTowermove;
+            else if (farmer) return farmermove;
+            else return randomizeMove();
 
         }
 
@@ -167,7 +127,6 @@ namespace Chess2._0
         //kollar om det går att ta queen
         public bool canTakeQueen(int fromX, int fromY, int toX, int toY)
         {
-
             if (board[toX, toY] is Queen)//det är en queen
             {
                 Move move = new Move(fromX, fromY, toX, toY);
@@ -208,7 +167,8 @@ namespace Chess2._0
             return false;
         }
 
-        public void randomizeMove()
+        //Slumpar bland alla möjliga moves
+        public Move randomizeMove()
         {
             ArrayList validMoves = new ArrayList();
 
@@ -222,19 +182,15 @@ namespace Chess2._0
                         Move move = new Move(myPiece.posX, myPiece.posY, tox, toy);
                         if (rules.isValid(move, this.Color))
                         {
-                            validMoves.Add(move);
+                            validMoves.Add(move);//Lägg till i listan över alla moves
                         }
                     }
                 }
             }
-
             Random rnd = new Random();
-            int rng = rnd.Next(0, validMoves.Count); //slumpar fram ett move
-            Move rngMove = validMoves[rng] as Move;
-            gw.makeMove(rngMove.getfromX(), rngMove.getfromY(), rngMove.gettoX(), rngMove.gettoY());
-
+            int rng = rnd.Next(0, validMoves.Count);
+            return validMoves[rng] as Move; //return ett slumpat move
         }
-
 
     }
 }

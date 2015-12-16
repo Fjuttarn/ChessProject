@@ -16,66 +16,48 @@ namespace Chess2._0
         //Läser data från xml-fil, skapar en representation av schackbräädet och returnerar det.
         public ChessPiece[,] LoadData()
         {
-            //Läser data
-            IEnumerable<string> posx = from chesspiece in XDocument.Load(@".\chessdata\chessdata.xml")
-                                                               .Descendants("ChessPiece")
-                                    select chesspiece.Element("posX").Value;
-            IEnumerable<string> posy = from chesspiece in XDocument.Load(@".\chessdata\chessdata.xml")
-                                                               .Descendants("ChessPiece")
-                                       select chesspiece.Element("posY").Value;
-            IEnumerable<string> color = from chesspiece in XDocument.Load(@".\chessdata\chessdata.xml")
-                                                               .Descendants("ChessPiece")
-                                       select chesspiece.Element("color").Value;
+            ChessPiece[,] board = new ChessPiece[8, 8];
+            XDocument doc = XDocument.Load(@".\chessdata\chessdata.xml");
 
-            IEnumerable<string> type = from chesspiece in XDocument.Load(@".\chessdata\chessdata.xml")
-                                                               .Descendants("ChessPiece")
-                                       select chesspiece.Element("type").Value;
+            var data = from item in doc.Descendants("ChessPiece")
+                       select new
+                       {
+                           posx = item.Element("posX").Value,
+                           posy = item.Element("posY").Value,
+                           color = item.Element("color").Value,
+                           type = item.Element("type").Value
+                       };
 
-
-            //Skapar tvådimensionell array av inläst data
-            ChessPiece[,] board = new ChessPiece[8,8];
-            for (int i = 0; i < posx.Count(); i++)
+            foreach (var c in data)
             {
-                switch (type.ElementAt(i))
+                switch (c.type)
                 {
                     case "Chess2._0.King":
-                        ChessPiece king = new King(color.ElementAt(i), int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i)));
-                            board[int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i))] = king;
+                        ChessPiece king = new King(c.color, int.Parse(c.posx), int.Parse(c.posy));
+                        board[int.Parse(c.posx), int.Parse(c.posy)] = king;
                         break;
                     case "Chess2._0.Queen":
-                        ChessPiece queen = new Queen(color.ElementAt(i), int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i)));
-                            board[int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i))] = queen;
+                        ChessPiece queen = new Queen(c.color, int.Parse(c.posx), int.Parse(c.posy));
+                        board[int.Parse(c.posx), int.Parse(c.posy)] = queen;
                         break;
                     case "Chess2._0.Runner":
-                        ChessPiece runner = new Runner(color.ElementAt(i), int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i)));
-                            board[int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i))] = runner;
+                        ChessPiece runner = new Runner(c.color, int.Parse(c.posx), int.Parse(c.posy));
+                        board[int.Parse(c.posx), int.Parse(c.posy)] = runner;
                         break;
                     case "Chess2._0.Horse":
-                        ChessPiece horse = new Horse(color.ElementAt(i), int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i)));
-                            board[int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i))] = horse;
+                        ChessPiece horse = new Horse(c.color, int.Parse(c.posx), int.Parse(c.posy));
+                        board[int.Parse(c.posx), int.Parse(c.posy)] = horse;
                         break;
                     case "Chess2._0.Tower":
-                        ChessPiece tower = new Tower(color.ElementAt(i), int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i)));
-                            board[int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i))] = tower;
+                        ChessPiece tower = new Tower(c.color, int.Parse(c.posx), int.Parse(c.posy));
+                        board[int.Parse(c.posx), int.Parse(c.posy)] = tower;
                         break;
                     case "Chess2._0.Farmer":
-                        ChessPiece farmer = new Farmer(color.ElementAt(i), int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i)));
-                            board[int.Parse(posx.ElementAt(i)), int.Parse(posy.ElementAt(i))] = farmer;
+                        ChessPiece farmer = new Farmer(c.color, int.Parse(c.posx), int.Parse(c.posy));
+                        board[int.Parse(c.posx), int.Parse(c.posy)] = farmer;
                         break;
                 }
             }
-
-            for (int x = 0; x < board.GetLength(0); x++)
-            {
-                for (int y = 0; y < board.GetLength(1); y++)
-                { 
-                    if(board[x, y] != null)
-                    {
-                        ChessPiece temp = board[x, y];
-                    }
-                }
-            }
-
             return board;
         }
 
