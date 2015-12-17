@@ -105,6 +105,20 @@ namespace Chess2._0
             return board;
         }
 
+        public ChessPiece[,] getCopy()
+        {
+            ChessPiece[,] boardToReturn = new ChessPiece[8,8];
+            for(int x = 0; x <= 7; x++)
+            {
+                for(int y = 0; y <= 7; y++)
+                {
+                    if (board[x, y] != null)
+                    boardToReturn[x, y] = board[x,y];
+                } 
+            }
+            return boardToReturn;
+        }
+
         public ChessPiece getblackKing()
         {
             return blackKing;
@@ -118,8 +132,15 @@ namespace Chess2._0
         //Updaterar brädet (arrayen) efter att ett drag genomförts
         public void updateTable(Move move)
         {
+            Console.WriteLine("Spelarens gamla pos: " + board[move.getfromX(), move.getfromY()]);
+            Console.WriteLine("X: " + move.getfromX() + "  Y: " + move.getfromY());
             board[move.gettoX(), move.gettoY()] = board[move.getfromX(), move.getfromY()];
             board[move.getfromX(), move.getfromY()] = null;
+            Console.WriteLine("X: " + move.gettoX() + "  Y: " + move.gettoY());
+            Console.WriteLine("Random spelare: " + board[0, 0]);
+            Console.WriteLine("Random spelare: " + board[1, 1]);
+            Console.WriteLine("Spelarens gamla pos: " + board[move.getfromX(), move.getfromY()]);
+            Console.WriteLine("Spelarens nya pos: " + board[move.gettoX(), move.gettoY()]);
             board[move.gettoX(), move.gettoY()].posX = move.gettoX();
             board[move.gettoX(), move.gettoY()].posY = move.gettoY();
         }

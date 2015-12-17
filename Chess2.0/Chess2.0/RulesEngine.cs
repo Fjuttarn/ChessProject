@@ -20,16 +20,17 @@ namespace Chess2._0
         public bool isValid(Move move, String gameStatus)
         {
             chessboard = board.get();
+            Console.WriteLine("Pjäsen innan draget har gjorts i isValid: " + chessboard[move.getfromX(), move.getfromY()]);
             if (board.colourOfPiece(move) == gameStatus)
             {
                 if (chessboard[move.getfromX(), move.getfromY()].isValidMove(move) && isLeagalMove(move))
                 {
-                    /*
+                    Console.WriteLine("Pjäsen innan draget har gjorts i isValid 2: " + chessboard[move.getfromX(), move.getfromY()]);
                     if (isCheck(move, gameStatus))
                     {
                         return false;
                     }
-                    */
+                    Console.WriteLine("Pjäsen innan draget har gjorts i isValid 3: " + chessboard[move.getfromX(), move.getfromY()]);
                     return true;
                 }
                 else
@@ -244,10 +245,10 @@ namespace Chess2._0
 
         //kollar om kungen står i check
         public bool isCheck(Move move, String gamestatus)
-        { 
+        {
             //sätt kungen till den nuvarande spelares kung:
             ChessPiece king;
-            if(gamestatus == "black")
+            if (gamestatus == "black")
             {
                 king = board.getblackKing();
             }
@@ -257,23 +258,26 @@ namespace Chess2._0
             }
 
             //Uppdatera temporärt bord, som det kommer se ut om movet skulle gå igenom:
-            chessboard[move.gettoX(), move.gettoY()] = chessboard[move.getfromX(), move.getfromY()];
-            chessboard[move.getfromX(), move.getfromY()] = null;
-
+            ChessPiece[,] temp = board.getCopy();
+            Console.WriteLine("Inne i isCheck 1: " + chessboard[move.getfromX(), move.getfromY()]);
+            temp[move.gettoX(), move.gettoY()] = temp[move.getfromX(), move.getfromY()];
+            temp[move.getfromX(), move.getfromY()] = null;
+            Console.WriteLine("Inne i isCheck 2 gammal plats: " + chessboard[move.getfromX(), move.getfromY()]);
+            Console.WriteLine("Inne i isCheck 2 ny plats: " + chessboard[move.gettoX(), move.gettoY()]);
             //loopa över nya brädet:
-            for (int x = 0; x < chessboard.GetLength(0); x++)
+            for (int x = 0; x <= 7; x++)
             {
-                for (int y = 0; y < chessboard.GetLength(1); y++)
+                for (int y = 0; y <= 7; y++)
                 {
                     //om vi hittar en pjäs:
-                    if (chessboard[x, y] != null)
+                    if (temp[x, y] != null)
                     {
-                        ChessPiece temp = chessboard[x, y];
+                        ChessPiece temp2 = temp[x, y];
                         //Om det är motståndarens pjäs
-                        if (temp.Color != gamestatus)
+                        if (temp2.Color != gamestatus)
                         {
                             Move checkMove = new Move(x, y, king.posX, king.posY);//move tar motståndarens position mot spelarens egen kung
-                            if (temp.isValidMove(checkMove) && isLeagalMove(checkMove))//om det går igenom har man satt sin egen kung i shack
+                            if (temp2.isValidMove(checkMove) && isLeagalMove(checkMove))//om det går igenom har man satt sin egen kung i shack
                             {
                                 return true;
                             }
@@ -284,6 +288,8 @@ namespace Chess2._0
                 }
 
             }
+            Console.WriteLine("Inne i isCheck 3 gammal plats: " + chessboard[move.getfromX(), move.getfromY()]);
+            Console.WriteLine("Inne i isCheck 3 ny plats: " + chessboard[move.gettoX(), move.gettoY()]);
             return false;
         }
         /*
