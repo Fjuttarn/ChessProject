@@ -11,9 +11,12 @@ namespace Chess2._0
     {
         private ChessPiece[,] board = new ChessPiece[8, 8];
         DataStorage ds = new DataStorage();
+        ChessPiece blackKing;
+        ChessPiece whiteKing;
 
         public ChessBoard()
         {
+         
             //Om det finns ett sparat spel, läs in det
             if (File.Exists(@".\chessdata\chessdata.xml"))
             {
@@ -23,7 +26,7 @@ namespace Chess2._0
             else
             {
                 //Skapar vita pjäser
-                ChessPiece whiteKing = new King("white", 3, 0);
+                whiteKing = new King("white", 3, 0);
                 ChessPiece whiteQueen = new Queen("white", 4, 0);
                 ChessPiece whiteRunner1 = new Runner("white", 2, 0);
                 ChessPiece whiteRunner2 = new Runner("white", 5, 0);
@@ -41,7 +44,7 @@ namespace Chess2._0
                 ChessPiece whiteFarmer8 = new Farmer("white", 7, 1);
 
                 //Skapar svarta pjäser
-                ChessPiece blackKing = new King("black", 4, 7);
+                blackKing = new King("black", 4, 7);
                 ChessPiece blackQueen = new Queen("black", 3, 7);
                 ChessPiece blackRunner1 = new Runner("black", 2, 7);
                 ChessPiece blackRunner2 = new Runner("black", 5, 7);
@@ -100,6 +103,16 @@ namespace Chess2._0
         public ChessPiece[,] get()
         {
             return board;
+        }
+
+        public ChessPiece getblackKing()
+        {
+            return blackKing;
+        }
+
+        public ChessPiece getwhiteKing()
+        {
+            return whiteKing;
         }
 
         //Updaterar brädet (arrayen) efter att ett drag genomförts

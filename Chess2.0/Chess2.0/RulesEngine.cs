@@ -9,6 +9,7 @@ namespace Chess2._0
    public class RulesEngine
     {
         private ChessBoard board;
+        ChessPiece[,] chessboard;
 
         public RulesEngine(ChessBoard board)
         {
@@ -18,10 +19,17 @@ namespace Chess2._0
         //Kollar om det är ett tillåtet drag
         public bool isValid(Move move, String gameStatus)
         {
+            chessboard = board.get();
             if (board.colourOfPiece(move) == gameStatus)
             {
-                if (board.get()[move.getfromX(), move.getfromY()].isValidMove(move) && isLeagalMove(move))
+                if (chessboard[move.getfromX(), move.getfromY()].isValidMove(move) && isLeagalMove(move))
                 {
+                    /*
+                    if (isCheck(move, gameStatus))
+                    {
+                        return false;
+                    }
+                    */
                     return true;
                 }
                 else
@@ -35,7 +43,7 @@ namespace Chess2._0
         //Kollar om draget är tillåtet enligt reglerna
         public bool isLeagalMove(Move move)
         {          
-            ChessPiece current = board.get()[move.getfromX(), move.getfromY()];
+            ChessPiece current = chessboard[move.getfromX(), move.getfromY()];
             
             if (current is Horse)
             {
@@ -81,7 +89,7 @@ namespace Chess2._0
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
                     y++;
-                    if (board.get()[x, y] != null) //om någon pjäs står i vägen
+                    if (chessboard[x, y] != null) //om någon pjäs står i vägen
                     {
                         if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
                         {
@@ -101,7 +109,7 @@ namespace Chess2._0
                 for (int x = move.getfromX() - 1; x >= move.gettoX(); x--)
                 {
                     y--;
-                    if (board.get()[x, y] != null)//om någon pjäs står i vägen
+                    if (chessboard[x, y] != null)//om någon pjäs står i vägen
                     {
                         if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
                         {
@@ -121,7 +129,7 @@ namespace Chess2._0
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
                     y--;
-                    if (board.get()[x, y] != null)//om någon pjäs står i vägen
+                    if (chessboard[x, y] != null)//om någon pjäs står i vägen
                     {
                         if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
                         {
@@ -142,7 +150,7 @@ namespace Chess2._0
                 for (int x = move.getfromX() - 1; x >= move.gettoX(); x--)
                 {
                     y++;
-                    if (board.get()[x, y] != null)//om någon pjäs står i vägen
+                    if (chessboard[x, y] != null)//om någon pjäs står i vägen
                     {
                         if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
                         {
@@ -166,7 +174,7 @@ namespace Chess2._0
             {
                 for (int y = move.getfromY() + 1; y <= move.gettoY(); y++)
                 {
-                    if (board.get()[move.getfromX(), y] != null)
+                    if (chessboard[move.getfromX(), y] != null)
                     {
                         if (y == move.gettoY() && board.squareStatus(move) != 1)
                         {
@@ -183,7 +191,7 @@ namespace Chess2._0
             {
                 for (int y = move.getfromY() - 1; y >= move.gettoY(); y--)
                 {
-                    if (board.get()[move.getfromX(), y] != null)
+                    if (chessboard[move.getfromX(), y] != null)
                     {
                         if (y == move.gettoY() && (board.squareStatus(move) != 1))
                         {
@@ -204,7 +212,7 @@ namespace Chess2._0
             {
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
-                    if (board.get()[x, move.getfromY()] != null)
+                    if (chessboard[x, move.getfromY()] != null)
                     {
                         if (x == move.gettoX() && board.squareStatus(move) != 1)
                         {
@@ -220,7 +228,7 @@ namespace Chess2._0
             {
                 for (int x = move.getfromX() - 1; x >= move.gettoX(); x--)
                 {
-                    if (board.get()[x, move.getfromY()] != null)
+                    if (chessboard[x, move.getfromY()] != null)
                     {
                         if (x == move.gettoX() && board.squareStatus(move) != 1)
                         {
@@ -235,19 +243,37 @@ namespace Chess2._0
         }
 
         //kollar om kungen står i check
-        public bool isCheck(King king)
-        {
-            for (int x = 0; x < board.get().GetLength(0); x++)
+        public bool isCheck(Move move, String gamestatus)
+        { 
+            //sätt kungen till den nuvarande spelares kung:
+            ChessPiece king;
+            if(gamestatus == "black")
             {
-                for (int y = 0; y < board.get().GetLength(1); y++)
+                king = board.getblackKing();
+            }
+            else
+            {
+                king = board.getwhiteKing();
+            }
+
+            //Uppdatera temporärt bord, som det kommer se ut om movet skulle gå igenom:
+            chessboard[move.gettoX(), move.gettoY()] = chessboard[move.getfromX(), move.getfromY()];
+            chessboard[move.getfromX(), move.getfromY()] = null;
+
+            //loopa över nya brädet:
+            for (int x = 0; x < chessboard.GetLength(0); x++)
+            {
+                for (int y = 0; y < chessboard.GetLength(1); y++)
                 {
-                    if (board.get()[x, y] != null)
+                    //om vi hittar en pjäs:
+                    if (chessboard[x, y] != null)
                     {
-                        ChessPiece temp = board.get()[x, y];
-                        if (temp.Color != king.Color)
+                        ChessPiece temp = chessboard[x, y];
+                        //Om det är motståndarens pjäs
+                        if (temp.Color != gamestatus)
                         {
-                            Move move = new Move(x, y, king.posX, king.posY);//move som går till motståndarens kung position
-                            if (isValid(move, board.colourOfPiece(move)))
+                            Move checkMove = new Move(x, y, king.posX, king.posY);//move tar motståndarens position mot spelarens egen kung
+                            if (temp.isValidMove(checkMove) && isLeagalMove(checkMove))//om det går igenom har man satt sin egen kung i shack
                             {
                                 return true;
                             }
@@ -260,7 +286,7 @@ namespace Chess2._0
             }
             return false;
         }
-
+        /*
         public bool isCheckMate(King king)
         {
 
@@ -279,7 +305,7 @@ namespace Chess2._0
             }
             return true;
         }
-
+        */
     }
 }
 
