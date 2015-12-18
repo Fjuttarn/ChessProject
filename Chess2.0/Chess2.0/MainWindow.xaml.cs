@@ -173,11 +173,11 @@ namespace Chess2._0
                 for (int y = 0; y < this.board.GetLength(1); y++)
                 {
                     Border cell = new Border();
-                    cell.Background = defaultBrush;
+                    cell.Background = alternateBrush;
 
                     if(y % 2 == x % 2)
                     {
-                        cell.Background = alternateBrush;
+                        cell.Background = defaultBrush;
                     }
                     Grid.SetColumn(cell, x);
                     Grid.SetRow(cell, y);

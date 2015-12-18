@@ -92,24 +92,27 @@ namespace Chess2._0
         public void makeMove(int fromX, int fromY, int toX, int toY)
         {         
             Move move = new Move(fromX, fromY, toX, toY);
-            Console.WriteLine("Pjäsen innan draget har gjorts: " + board.get()[move.getfromX(), move.getfromY()]);
-            if (rules.isValid(move, gamestatus))
+
+            if (rules.isValid(move, gamestatus, board.get()))
             {
-                Console.WriteLine("HEJHEJHEE");
-                Console.WriteLine("Pjäsen innan draget har gjorts 2: " + board.get()[move.getfromX(), move.getfromY()]);
+   
+               
+               
+                
                 board.updateTable(move);
                 window.updateTable();
                 ds.SaveData(board.get());
 
                 //Kollar om kungen blev utslagen
-                if (board.isKingDead(gamestatus))
+          
+
+                switchTurn();
+                if (rules.isCheckMate(gamestatus))
                 {
-                    gamestatus = gamestatus + " player won, Game Over!";
+                    gamestatus = gamestatus + " player lost. GAME OVER!";
                     ds.removeFile();
                     window.gameOver(gamestatus);
                 }
-
-                switchTurn();
             }
         }
 

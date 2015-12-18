@@ -11,8 +11,6 @@ namespace Chess2._0
     {
         private ChessPiece[,] board = new ChessPiece[8, 8];
         DataStorage ds = new DataStorage();
-        ChessPiece blackKing;
-        ChessPiece whiteKing;
 
         public ChessBoard()
         {
@@ -26,7 +24,7 @@ namespace Chess2._0
             else
             {
                 //Skapar vita pjäser
-                whiteKing = new King("white", 3, 0);
+                ChessPiece whiteKing = new King("white", 3, 0);
                 ChessPiece whiteQueen = new Queen("white", 4, 0);
                 ChessPiece whiteRunner1 = new Runner("white", 2, 0);
                 ChessPiece whiteRunner2 = new Runner("white", 5, 0);
@@ -44,7 +42,7 @@ namespace Chess2._0
                 ChessPiece whiteFarmer8 = new Farmer("white", 7, 1);
 
                 //Skapar svarta pjäser
-                blackKing = new King("black", 4, 7);
+                ChessPiece blackKing = new King("black", 4, 7);
                 ChessPiece blackQueen = new Queen("black", 3, 7);
                 ChessPiece blackRunner1 = new Runner("black", 2, 7);
                 ChessPiece blackRunner2 = new Runner("black", 5, 7);
@@ -62,8 +60,8 @@ namespace Chess2._0
                 ChessPiece blackFarmer8 = new Farmer("black", 7, 6);
 
                 //Lägg till pjäser i tvådimensionell array som representerar schackbrädet
-                board[3, 0] = whiteKing;
-                board[4, 0] = whiteQueen;
+                board[4, 0] = whiteKing;
+                board[3, 0] = whiteQueen;
                 board[2, 0] = whiteRunner1;
                 board[5, 0] = whiteRunner2;
                 board[1, 0] = whiteHorse1;
@@ -119,15 +117,6 @@ namespace Chess2._0
             return boardToReturn;
         }
 
-        public ChessPiece getblackKing()
-        {
-            return blackKing;
-        }
-
-        public ChessPiece getwhiteKing()
-        {
-            return whiteKing;
-        }
 
         //Updaterar brädet (arrayen) efter att ett drag genomförts
         public void updateTable(Move move)
@@ -179,12 +168,12 @@ namespace Chess2._0
         //1. Egen pjäs
         //2. Motståndares pjäs
         //3. Tom ruta
-        public int squareStatus(Move move)
+        public int squareStatus(Move move, ChessPiece[,] currentBoard)
         {
-            if (board[move.gettoX(), move.gettoY()] != null)
+            if (currentBoard[move.gettoX(), move.gettoY()] != null)
             {
-                ChessPiece p1 = board[move.getfromX(), move.getfromY()];
-                ChessPiece p2 = board[move.gettoX(), move.gettoY()];
+                ChessPiece p1 = currentBoard[move.getfromX(), move.getfromY()];
+                ChessPiece p2 = currentBoard[move.gettoX(), move.gettoY()];
 
                 if (p1.Color == p2.Color)
                 {
@@ -200,11 +189,11 @@ namespace Chess2._0
         }
 
         //Returnerar färgen på pjäsen som flyttas
-        public string colourOfPiece(Move move)
+        public string colourOfPiece(Move move, ChessPiece[,] currentBoard)
         {
-            if (board[move.getfromX(), move.getfromY()] != null)
+            if (currentBoard[move.getfromX(), move.getfromY()] != null)
             {
-                return board[move.getfromX(), move.getfromY()].Color;
+                return currentBoard[move.getfromX(), move.getfromY()].Color;
             }
             else return "";
 

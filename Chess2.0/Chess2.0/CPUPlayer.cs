@@ -118,7 +118,7 @@ namespace Chess2._0
             if (board[toX, toY] is King)//det är en kung
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, this.Color))
+                if (rules.isValid(move, this.Color, board))
                 {
                     return true;
                 }
@@ -132,7 +132,7 @@ namespace Chess2._0
             if (board[toX, toY] is Queen)//det är en queen
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, this.Color))
+                if (rules.isValid(move, this.Color, board))
                 {
                     return true;
                 }
@@ -146,7 +146,7 @@ namespace Chess2._0
             if (board[toX, toY] is Tower || board[toX, toY] is Runner || board[toX, toY] is Horse)//det är en horse, runner eller tower
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, this.Color))
+                if (rules.isValid(move, this.Color, board))
                 {
                     return true;
                 }
@@ -161,7 +161,7 @@ namespace Chess2._0
             if (board[toX, toY] is Farmer)
             {
                 Move move = new Move(fromX, fromY, toX, toY);
-                if (rules.isValid(move, this.Color))
+                if (rules.isValid(move, this.Color, board))
                 {
                     return true;
                 }
@@ -182,7 +182,7 @@ namespace Chess2._0
                     for (int toy = 0; toy < board.GetLength(1); toy++)
                     {
                         Move move = new Move(myPiece.posX, myPiece.posY, tox, toy);
-                        if (rules.isValid(move, this.Color))
+                        if (rules.isValid(move, this.Color, board))
                         {
                             validMoves.Add(move);//Lägg till i listan över alla moves
                         }
