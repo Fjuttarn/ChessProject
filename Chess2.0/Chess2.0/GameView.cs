@@ -87,6 +87,12 @@ namespace Chess2._0
                 makeMove(newMove[0], newMove[1], newMove[2], newMove[3]);
             }
         }
+        public void gameOver()
+        {
+            gamestatus = gamestatus + " player lost. GAME OVER!";
+            ds.removeFile();
+            window.gameOver(gamestatus);
+        }
 
         //Kallas på efter att en player försöker göra ett drag för att se till att det är giltigt
         public void makeMove(int fromX, int fromY, int toX, int toY)
@@ -95,10 +101,6 @@ namespace Chess2._0
 
             if (rules.isValid(move, gamestatus, board.get()))
             {
-   
-               
-               
-                
                 board.updateTable(move);
                 window.updateTable();
                 ds.SaveData(board.get());
@@ -109,10 +111,10 @@ namespace Chess2._0
                 switchTurn();
                 if (rules.isCheckMate(gamestatus))
                 {
-                    gamestatus = gamestatus + " player lost. GAME OVER!";
-                    ds.removeFile();
-                    window.gameOver(gamestatus);
+                    System.Console.WriteLine("isCheckmate kallar på gameover");
+                    gameOver();
                 }
+                
             }
         }
 

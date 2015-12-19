@@ -78,7 +78,7 @@ namespace Chess2._0
                 board[7, 1] = whiteFarmer8;
 
                 board[4, 7] = blackKing;
-                board[3, 7] = blackQueen;
+            /*    board[3, 7] = blackQueen;
                 board[2, 7] = blackRunner1;
                 board[5, 7] = blackRunner2;
                 board[1, 7] = blackHorse1;
@@ -92,7 +92,7 @@ namespace Chess2._0
                 board[4, 6] = blackFarmer5;
                 board[5, 6] = blackFarmer6;
                 board[6, 6] = blackFarmer7;
-                board[7, 6] = blackFarmer8;
+                board[7, 6] = blackFarmer8;*/
 
                 ds.SaveData(board);
             }
@@ -121,15 +121,8 @@ namespace Chess2._0
         //Updaterar brädet (arrayen) efter att ett drag genomförts
         public void updateTable(Move move)
         {
-            Console.WriteLine("Spelarens gamla pos: " + board[move.getfromX(), move.getfromY()]);
-            Console.WriteLine("X: " + move.getfromX() + "  Y: " + move.getfromY());
             board[move.gettoX(), move.gettoY()] = board[move.getfromX(), move.getfromY()];
             board[move.getfromX(), move.getfromY()] = null;
-            Console.WriteLine("X: " + move.gettoX() + "  Y: " + move.gettoY());
-            Console.WriteLine("Random spelare: " + board[0, 0]);
-            Console.WriteLine("Random spelare: " + board[1, 1]);
-            Console.WriteLine("Spelarens gamla pos: " + board[move.getfromX(), move.getfromY()]);
-            Console.WriteLine("Spelarens nya pos: " + board[move.gettoX(), move.gettoY()]);
             board[move.gettoX(), move.gettoY()].posX = move.gettoX();
             board[move.gettoX(), move.gettoY()].posY = move.gettoY();
         }

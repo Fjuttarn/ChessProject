@@ -49,7 +49,7 @@ namespace Chess2._0
                 }
                 return true;
             }
-            if (current is Farmer)
+           else if (current is Farmer)
             {
                 if ((move.getfromX() != move.gettoX() && board.squareStatus(move, currentBoard) == 2) ||
                     (move.gettoX() == move.getfromX() && board.squareStatus(move, currentBoard) == 3))
@@ -80,84 +80,103 @@ namespace Chess2._0
         //Kollar om ett diagonalt drag är godkänt
         public bool checkDiagonal(Move move, ChessPiece[,] currentBoard)
         {
-            int y = move.getfromY();
+            
             if (move.getfromX() < move.gettoX() && move.getfromY() < move.gettoY()) //x och y ökar
             {
+                int y = move.getfromY()  + 1;
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
-                    y++;
-                    if (currentBoard[x, y] != null) //om någon pjäs står i vägen
+                    if (y < 8)
                     {
-                        if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
+                        if (currentBoard[x, y] != null) //om någon pjäs står i vägen
                         {
-                            if (board.squareStatus(move, currentBoard) == 2)//Pjäsen har eliminerat en motståndare
+                            if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
                             {
-                                return true;
+                                if (board.squareStatus(move, currentBoard) == 2)//Pjäsen har eliminerat en motståndare
+                                {
+                                    return true;
+                                }
                             }
+                            return false;
                         }
-                        return false;
                     }
+                    y++;
                 }
                 return true;
             }
 
             if (move.getfromX() > move.gettoX() && move.getfromY() > move.gettoY()) //x och y minskar
             {
+                int y = move.getfromY() - 1;
                 for (int x = move.getfromX() - 1; x >= move.gettoX(); x--)
                 {
-                    y--;
-                    if (currentBoard[x, y] != null)//om någon pjäs står i vägen
+                    if (y < 8)
                     {
-                        if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
+                        if (currentBoard[x, y] != null)//om någon pjäs står i vägen
                         {
-                            if (board.squareStatus(move, currentBoard) == 2)//Pjäsen har eliminerat en motståndare
+                            if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
                             {
-                                return true;
+                                if (board.squareStatus(move, currentBoard) == 2)//Pjäsen har eliminerat en motståndare
+                                {
+                                    return true;
+                                }
                             }
+                            return false;
                         }
-                        return false;
                     }
+                    y--;
                 }
                 return true;
             }
 
             if (move.getfromX() < move.gettoX() && move.getfromY() > move.gettoY()) //x ökar, y minskar
             {
+                int y = move.getfromY() - 1;
                 for (int x = move.getfromX() + 1; x <= move.gettoX(); x++)
                 {
-                    y--;
-                    if (currentBoard[x, y] != null)//om någon pjäs står i vägen
+                    if (y < 8)
                     {
-                        if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
+                        if (currentBoard[x, y] != null)//om någon pjäs står i vägen
                         {
-                            if (board.squareStatus(move, currentBoard) == 2)//Pjäsen har eliminerat en motståndare
+                            if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
                             {
-                                return true;
+                                if (board.squareStatus(move, currentBoard) == 2)//Pjäsen har eliminerat en motståndare
+                                {
+                                    return true;
+                                }
                             }
+                            return false;
                         }
-                        return false;
                     }
+                    y--;
                 }
                 return true;
             }
 
-            if (move.getfromX() > move.gettoX() && move.getfromY() < move.gettoY()) //x minskar, y ökar
+            if (move.getfromX() > move.gettoX() && move.getfromY() < move.gettoY()) //x minskar, y ökar, alltid här
             {
-                
+                int y = move.getfromY() + 1;
+
                 for (int x = move.getfromX() - 1; x >= move.gettoX(); x--)
                 {
-                    y++;
-                    if (currentBoard[x, y] != null)//om någon pjäs står i vägen
+
+
+                    if (y < 8)
                     {
-                        if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
+                        if (currentBoard[x, y] != null)//om någon pjäs står i vägen
                         {
-                            if (board.squareStatus(move, currentBoard) == 2)//Pjäsen har eliminerat en motståndare
+                            if (x == move.gettoX() && y == move.gettoY()) //pjäsen har nått sitt mål
                             {
-                                return true;
+                                if (board.squareStatus(move, currentBoard) == 2)//Pjäsen har eliminerat en motståndare
+                                {
+                                    return true;
+                                }
                             }
+                            return false;
                         }
-                        return false;
                     }
+
+                    y++;
                 }
                 return true;
             }
@@ -240,18 +259,21 @@ namespace Chess2._0
         }
         public ChessPiece getKingInCopiedBoard(ChessPiece[,] temp, String gamestatus)
         {
-            for (int x = 0; x <= 7; x++)
+            for (int x = 0; x <= temp.GetLength(0); x++)
             {
-                for (int y = 0; y <= 7; y++)
+                for (int y = 0; y <= temp.GetLength(1); y++)
                 {
-                    if (temp[x, y] != null)
+                    if (y < 8 && x < 8)
                     {
-                        ChessPiece piece = temp[x, y];
-                        if (piece.Color == gamestatus && piece is King)
+                        if (temp[x, y] != null)
                         {
-                            piece.posX = x;
-                            piece.posY = y;
-                            return piece;
+                            ChessPiece piece = temp[x, y];
+                            if (piece.Color == gamestatus && piece is King)
+                            {
+                                piece.posX = x;
+                                piece.posY = y;
+                                return piece;
+                            }
                         }
                     }
                 }
@@ -316,7 +338,7 @@ namespace Chess2._0
                                 for(int toy = 0; toy <= 7; toy++)
                                 {
                                     Move tempmove = new Move(fromx, fromy, tox, toy);
-                                    if (isLeagalMove(tempmove, board.get()) && !isCheck(tempmove, gamestatus) && temp.isValidMove(tempmove))
+                                    if (temp.isValidMove(tempmove) && isLeagalMove(tempmove, board.get()) && !isCheck(tempmove, gamestatus))
                                     {
                                         return false;
                                     }

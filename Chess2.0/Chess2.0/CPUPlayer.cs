@@ -42,10 +42,16 @@ namespace Chess2._0
                         ChessPiece current = board[fromx, fromy];
                         if (board[fromx, fromy].Color != this.Color)//det är vår spelare
                         {
+
                             enemyPieces.Add(current);
                         }
                         else
                         {
+                            /*   if (current is King)
+                               {
+                                   current.posX = fromx;
+                                   current.posY = fromy;
+                               }*/
                             myPieces.Add(current);
                         }
                     }
@@ -61,7 +67,11 @@ namespace Chess2._0
             this.board = chessboard.get();
             updateLists();
             Move bestMove = findBestMove();
-            gw.makeMove(bestMove.getfromX(), bestMove.getfromY(), bestMove.gettoX(), bestMove.gettoY());
+            if (bestMove != null)
+            {
+                gw.makeMove(bestMove.getfromX(), bestMove.getfromY(), bestMove.gettoX(), bestMove.gettoY());
+            }
+         
         }
 
         //Hittar ett bra move
@@ -173,25 +183,49 @@ namespace Chess2._0
         public Move randomizeMove()
         {
             ArrayList validMoves = new ArrayList();
-
-            foreach (ChessPiece myPiece in myPieces)
+            System.Console.WriteLine("mina pjäser antal: " + myPieces.Count);
+            //    foreach (ChessPiece myPiece in myPieces)
+            //  {
+            for (int fromx = 0; fromx < board.GetLength(0); fromx++)
             {
-                //hämtar våra to kordinater
-                for (int tox = 0; tox < board.GetLength(0); tox++)
+                for (int fromy = 0; fromy < board.GetLength(1); fromy++)
                 {
-                    for (int toy = 0; toy < board.GetLength(1); toy++)
+                    if (board[fromx, fromy] != null)
                     {
-                        Move move = new Move(myPiece.posX, myPiece.posY, tox, toy);
-                        if (rules.isValid(move, this.Color, board))
+                        ChessPiece myPiece = board[fromx, fromy];
+                        if (board[fromx, fromy].Color == this.Color)//det är vår spelare
                         {
-                            validMoves.Add(move);//Lägg till i listan över alla moves
+                            //hämtar våra to kordinater
+                            for (int tox = 0; tox < board.GetLength(0); tox++)
+                            {
+                                for (int toy = 0; toy < board.GetLength(1); toy++)
+                                {
+                                    Move move = new Move(fromx, fromy, tox, toy);
+                                    if(rules.isValid(move, myPiece.Color, board))
+                                //    if (myPiece.isValidMove(move) && rules.isLeagalMove(move, board) && !rules.isCheck(move, myPiece.Color))
+                                    {
+                                        System.Console.WriteLine("lägger till möjligt move i listan!");
+                                        validMoves.Add(move);//Lägg till i listan över alla moves
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
             Random rnd = new Random();
-            int rng = rnd.Next(0, validMoves.Count);
-            return validMoves[rng] as Move; //return ett slumpat move
+            System.Console.WriteLine(" antal valid moves: " + validMoves.Count);
+            if (validMoves.Count > 0)
+            {
+                int rng = rnd.Next(0, validMoves.Count - 1);
+                System.Console.WriteLine("rng: " + rng);
+                return validMoves[rng] as Move; //return ett slumpat move
+            }
+            else
+            {
+                System.Console.WriteLine("return null i randomizemove");
+                return null;
+            }
         }
 
     }
