@@ -87,6 +87,8 @@ namespace Chess2._0
                 makeMove(newMove[0], newMove[1], newMove[2], newMove[3]);
             }
         }
+
+        //Ändrar gamestatus till gameover, och tar bort lagringsfilen
         public void gameOver()
         {
             gamestatus = gamestatus + " player lost. GAME OVER!";
@@ -106,12 +108,10 @@ namespace Chess2._0
                 ds.SaveData(board.get());
 
                 //Kollar om kungen blev utslagen
-          
-
                 switchTurn();
+
                 if (rules.isCheckMate(gamestatus))
                 {
-                    System.Console.WriteLine("isCheckmate kallar på gameover");
                     gameOver();
                 }
                 

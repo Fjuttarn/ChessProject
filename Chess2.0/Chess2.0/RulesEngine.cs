@@ -257,30 +257,6 @@ namespace Chess2._0
             }
             return false;
         }
-        public ChessPiece getKingInCopiedBoard(ChessPiece[,] temp, String gamestatus)
-        {
-            for (int x = 0; x <= temp.GetLength(0); x++)
-            {
-                for (int y = 0; y <= temp.GetLength(1); y++)
-                {
-                    if (y < 8 && x < 8)
-                    {
-                        if (temp[x, y] != null)
-                        {
-                            ChessPiece piece = temp[x, y];
-                            if (piece.Color == gamestatus && piece is King)
-                            {
-                                piece.posX = x;
-                                piece.posY = y;
-                                return piece;
-                            }
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-      
 
         //kollar om kungen står i check
         public bool isCheck(Move move, String gamestatus)
@@ -292,7 +268,7 @@ namespace Chess2._0
             temp[move.getfromX(), move.getfromY()] = null;
 
             //Hämta kungens position
-            ChessPiece king = getKingInCopiedBoard(temp, gamestatus);
+            ChessPiece king = board.getKingFromBoard(temp, gamestatus);
             
             //loopa över nya brädet:
             for (int x = 0; x <= 7; x++)
@@ -321,6 +297,7 @@ namespace Chess2._0
             return false;
         }
         
+        //Kollar om det är shackmatt
         public bool isCheckMate(string gamestatus)
         {
 

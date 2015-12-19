@@ -47,11 +47,6 @@ namespace Chess2._0
                         }
                         else
                         {
-                            /*   if (current is King)
-                               {
-                                   current.posX = fromx;
-                                   current.posY = fromy;
-                               }*/
                             myPieces.Add(current);
                         }
                     }
@@ -183,9 +178,6 @@ namespace Chess2._0
         public Move randomizeMove()
         {
             ArrayList validMoves = new ArrayList();
-            System.Console.WriteLine("mina pjäser antal: " + myPieces.Count);
-            //    foreach (ChessPiece myPiece in myPieces)
-            //  {
             for (int fromx = 0; fromx < board.GetLength(0); fromx++)
             {
                 for (int fromy = 0; fromy < board.GetLength(1); fromy++)
@@ -202,9 +194,7 @@ namespace Chess2._0
                                 {
                                     Move move = new Move(fromx, fromy, tox, toy);
                                     if(rules.isValid(move, myPiece.Color, board))
-                                //    if (myPiece.isValidMove(move) && rules.isLeagalMove(move, board) && !rules.isCheck(move, myPiece.Color))
                                     {
-                                        System.Console.WriteLine("lägger till möjligt move i listan!");
                                         validMoves.Add(move);//Lägg till i listan över alla moves
                                     }
                                 }
@@ -214,16 +204,13 @@ namespace Chess2._0
                 }
             }
             Random rnd = new Random();
-            System.Console.WriteLine(" antal valid moves: " + validMoves.Count);
             if (validMoves.Count > 0)
             {
                 int rng = rnd.Next(0, validMoves.Count - 1);
-                System.Console.WriteLine("rng: " + rng);
                 return validMoves[rng] as Move; //return ett slumpat move
             }
             else
             {
-                System.Console.WriteLine("return null i randomizemove");
                 return null;
             }
         }

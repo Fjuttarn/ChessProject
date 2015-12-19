@@ -78,7 +78,7 @@ namespace Chess2._0
                 board[7, 1] = whiteFarmer8;
 
                 board[4, 7] = blackKing;
-            /*    board[3, 7] = blackQueen;
+                board[3, 7] = blackQueen;
                 board[2, 7] = blackRunner1;
                 board[5, 7] = blackRunner2;
                 board[1, 7] = blackHorse1;
@@ -92,7 +92,7 @@ namespace Chess2._0
                 board[4, 6] = blackFarmer5;
                 board[5, 6] = blackFarmer6;
                 board[6, 6] = blackFarmer7;
-                board[7, 6] = blackFarmer8;*/
+                board[7, 6] = blackFarmer8;
 
                 ds.SaveData(board);
             }
@@ -127,37 +127,6 @@ namespace Chess2._0
             board[move.gettoX(), move.gettoY()].posY = move.gettoY();
         }
 
-        //Kollar om någon av kungarna har blivit utslagen
-        public bool isKingDead(String gameStatus)
-        {
-            for (int x = 0; x < board.GetLength(0); x++)
-            {
-                for (int y = 0; y < board.GetLength(1); y++)
-                {
-                    if (board[x, y] != null)
-                    {
-                        ChessPiece temp = board[x, y];
-
-                        if (gameStatus.Equals("white"))
-                        {
-                            if (temp is King && temp.Color == "black")
-                            {
-                                return false;
-                            }
-                        }
-                        else if (gameStatus.Equals("black"))
-                        {
-                            if (temp is King && temp.Color == "white")
-                            {
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-
         //1. Egen pjäs
         //2. Motståndares pjäs
         //3. Tom ruta
@@ -190,6 +159,31 @@ namespace Chess2._0
             }
             else return "";
 
+        }
+
+        //returnerar kungen från brädet
+        public ChessPiece getKingFromBoard(ChessPiece[,] temp, String gamestatus)
+        {
+            for (int x = 0; x <= temp.GetLength(0); x++)
+            {
+                for (int y = 0; y <= temp.GetLength(1); y++)
+                {
+                    if (y < 8 && x < 8)
+                    {
+                        if (temp[x, y] != null)
+                        {
+                            ChessPiece piece = temp[x, y];
+                            if (piece.Color == gamestatus && piece is King)
+                            {
+                                piece.posX = x;
+                                piece.posY = y;
+                                return piece;
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
     }
