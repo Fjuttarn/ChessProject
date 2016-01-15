@@ -10,5 +10,10 @@ namespace Chess2._0
     {
         public HumanPlayer(String color) : base(color) { }
 
+        public override void movePiece()
+        {
+
+        }
     }
+ 
 }

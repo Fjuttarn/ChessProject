@@ -23,13 +23,13 @@ namespace Chess2._0
             set
             {
                 _gamestatus = value;
-                if(_gamestatus == "black" && playerblack is CPUPlayer)
+                if(_gamestatus == "black")
                 {
-                    playerblack.AImove();
+                    playerblack.movePiece();
                 }
-                if(_gamestatus == "white" && playerwhite is CPUPlayer)
+                if(_gamestatus == "white")
                 {
-                    playerwhite.AImove();
+                    playerwhite.movePiece();
                 }
             }
         }

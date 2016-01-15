@@ -55,7 +55,7 @@ namespace Chess2._0
         }
 
         //AI-spelaren gör ett drag
-        public async override void AImove()
+        public async override void movePiece()
         {
             await Task.Delay(500);
 

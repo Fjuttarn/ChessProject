@@ -25,6 +25,6 @@ namespace Chess2._0
 
         public virtual void setupAI(ChessBoard chessboard, GameView gw) { }
 
-        public virtual void AImove() { }
+        public virtual void movePiece() { }
     }
 }
