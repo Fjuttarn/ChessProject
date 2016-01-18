@@ -17,7 +17,7 @@ namespace Chess2._0
         Player playerblack;
         RulesEngine rules;
         string _gamestatus;
-        DataStorage ds = new DataStorage();
+        DataStorage ds;
         FileSystemWatcher watcher;
 
         public String gamestatus
@@ -39,18 +39,21 @@ namespace Chess2._0
 
         public GameView(MainWindow window)
         {
+            setupWatcher();
+            ds = new DataStorage(watcher);
             this.window = window;
         }
 
         //Initierar spelare utifrån vad som har valts i menyerna
         public void GameSetup(string gamemode, bool isNewGame, string color)
         {
+       
             if (isNewGame)
             {
                 ds.removeFile();
             }
 
-            board = new ChessBoard();
+            board = new ChessBoard(ds);
 
             if (gamemode == "singleplayer")
             {
@@ -78,7 +81,6 @@ namespace Chess2._0
             rules = new RulesEngine(board);
             window.setBoard(board.get());
             window.updateTable();
-            setupWatcher();
             gamestatus = "white";
         }
 
@@ -138,25 +140,25 @@ namespace Chess2._0
         public void setupWatcher()
         {
             watcher = new FileSystemWatcher();
-            watcher.Path = AppDomain.CurrentDomain.BaseDirectory;
-            watcher.NotifyFilter = NotifyFilters.LastWrite;
-
+            watcher.Path = @".\chessdata\";
             watcher.Filter = "*.xml";
+            watcher.NotifyFilter = NotifyFilters.LastWrite;
             watcher.Changed += new FileSystemEventHandler(xmlwatcher);
             watcher.EnableRaisingEvents = true;
-
         }   
 
         private void xmlwatcher(object source, FileSystemEventArgs e)
         {
             watcher.EnableRaisingEvents = false;
-            MessageBox.Show("någon har ändrat i XML filen!");
             board.setBoard(ds.LoadData());
             Application.Current.Dispatcher.BeginInvoke(
                 DispatcherPriority.Background, new Action(() =>
                 {
-                    window.updateTable();
+                   window.updateTable();
                 }));
+                
+   
+
             watcher.EnableRaisingEvents = true;
         }
     }

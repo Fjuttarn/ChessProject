@@ -10,11 +10,11 @@ namespace Chess2._0
    public class ChessBoard
     {
         private ChessPiece[,] board = new ChessPiece[8, 8];
-        DataStorage ds = new DataStorage();
+        DataStorage ds;
 
-        public ChessBoard()
+        public ChessBoard(DataStorage dataS)
         {
-         
+            ds = dataS;
             //Om det finns ett sparat spel, läs in det
             if (File.Exists(@".\chessdata\chessdata.xml"))
             {

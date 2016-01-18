@@ -9,9 +9,14 @@ using System.IO;
 
 namespace Chess2._0
 {
-    class DataStorage
+  public class DataStorage
     {
-        public DataStorage(){}
+        FileSystemWatcher watcher;
+
+        public DataStorage(FileSystemWatcher watch)
+        {
+            watcher = watch;
+        }
 
         //Läser data från xml-fil, skapar en representation av schackbräädet och returnerar det.
         public ChessPiece[,] LoadData()
@@ -65,6 +70,8 @@ namespace Chess2._0
         //Skriver schackbrädet i sitt nuvarande tillstånd till en xml-fil
         public void SaveData(ChessPiece[,] board)
         {
+            watcher.EnableRaisingEvents = false;
+
             ArrayList list = new ArrayList();
             for (int x = 0; x < board.GetLength(0); x++)
             {
@@ -95,6 +102,8 @@ namespace Chess2._0
 
         )));
             xmlDoc.Save(@".\chessdata\chessdata.xml");
+
+            watcher.EnableRaisingEvents = true;
         }
 
         //Ta bort xml-filen

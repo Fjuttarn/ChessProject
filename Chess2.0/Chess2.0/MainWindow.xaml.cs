@@ -159,7 +159,6 @@ namespace Chess2._0
             Grid.SetColumn(img2, 0);
             Grid.SetRow(img2, 0);
             TheGrid.Children.Add(img2);
-
         }
 
         //Målar schackbrädet (rutorna)
