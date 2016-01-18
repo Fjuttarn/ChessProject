@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
+using System.Windows.Controls;
 
 namespace Chess2._0
 {
@@ -149,17 +151,17 @@ namespace Chess2._0
 
         private void xmlwatcher(object source, FileSystemEventArgs e)
         {
+    
             watcher.EnableRaisingEvents = false;
             board.setBoard(ds.LoadData());
-            Application.Current.Dispatcher.BeginInvoke(
-                DispatcherPriority.Background, new Action(() =>
-                {
-                   window.updateTable();
-                }));
-                
-   
+            Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate
+            {
+                window.setBoard(board.get());
+                window.updateTable();
+            }));
 
             watcher.EnableRaisingEvents = true;
+             
         }
     }
 }

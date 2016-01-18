@@ -24,8 +24,8 @@ namespace Chess2._0
             else
             {
                 //Skapar vita pjäser
-                ChessPiece whiteKing = new King("white", 3, 0);
-                ChessPiece whiteQueen = new Queen("white", 4, 0);
+                ChessPiece whiteKing = new King("white", 4, 0);
+                ChessPiece whiteQueen = new Queen("white", 3, 0);
                 ChessPiece whiteRunner1 = new Runner("white", 2, 0);
                 ChessPiece whiteRunner2 = new Runner("white", 5, 0);
                 ChessPiece whiteHorse1 = new Horse("white", 1, 0);

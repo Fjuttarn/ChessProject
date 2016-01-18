@@ -166,7 +166,7 @@ namespace Chess2._0
         {
             SolidColorBrush defaultBrush = new SolidColorBrush(Colors.Brown);
             SolidColorBrush alternateBrush = new SolidColorBrush(Colors.Beige);
-            
+    
             for (int x = 0; x < this.board.GetLength(0); x++)
             {       
                 for (int y = 0; y < this.board.GetLength(1); y++)
