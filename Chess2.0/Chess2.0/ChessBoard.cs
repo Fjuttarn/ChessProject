@@ -103,6 +103,12 @@ namespace Chess2._0
             return board;
         }
 
+
+        public void setBoard(ChessPiece[,] brd)
+        {
+            board = brd;
+        }
+
         public ChessPiece[,] getCopy()
         {
             ChessPiece[,] boardToReturn = new ChessPiece[8,8];

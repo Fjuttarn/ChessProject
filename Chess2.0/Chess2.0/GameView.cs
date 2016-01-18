@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace Chess2._0
 {
@@ -16,6 +18,7 @@ namespace Chess2._0
         RulesEngine rules;
         string _gamestatus;
         DataStorage ds = new DataStorage();
+        FileSystemWatcher watcher;
 
         public String gamestatus
         {
@@ -75,6 +78,7 @@ namespace Chess2._0
             rules = new RulesEngine(board);
             window.setBoard(board.get());
             window.updateTable();
+            setupWatcher();
             gamestatus = "white";
         }
 
@@ -130,6 +134,30 @@ namespace Chess2._0
                 gamestatus = "white";
             }
         }
-   
+
+        public void setupWatcher()
+        {
+            watcher = new FileSystemWatcher();
+            watcher.Path = AppDomain.CurrentDomain.BaseDirectory;
+            watcher.NotifyFilter = NotifyFilters.LastWrite;
+
+            watcher.Filter = "*.xml";
+            watcher.Changed += new FileSystemEventHandler(xmlwatcher);
+            watcher.EnableRaisingEvents = true;
+
+        }   
+
+        private void xmlwatcher(object source, FileSystemEventArgs e)
+        {
+            watcher.EnableRaisingEvents = false;
+            MessageBox.Show("någon har ändrat i XML filen!");
+            board.setBoard(ds.LoadData());
+            Application.Current.Dispatcher.BeginInvoke(
+                DispatcherPriority.Background, new Action(() =>
+                {
+                    window.updateTable();
+                }));
+            watcher.EnableRaisingEvents = true;
+        }
     }
 }
