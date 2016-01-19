@@ -64,8 +64,6 @@ namespace Chess2._0
                         break;
                 }
             }
-         
-
             return board;
         }
 

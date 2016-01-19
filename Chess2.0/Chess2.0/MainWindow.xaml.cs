@@ -24,6 +24,8 @@ namespace Chess2._0
         int[] move = new int[4];
         bool firstClick = true;
         Image[] piecesToUpdate = new Image[2];
+        Player whitePlayer;
+        Player blackPlayer;
 
         public MainWindow()
         {
@@ -31,12 +33,19 @@ namespace Chess2._0
             Chess chess = new Chess(this);
         }
 
+        public void setPlayers(Player white, Player black)
+        {
+            whitePlayer = white;
+            blackPlayer = black;
+        }
+           
+
         public void setBoard(ChessPiece[,] board)
         {
             this.board = board;
         }
 
-        public Action<int[]> onMoveCompleted { get; set; }
+        public Action<int[], Player> onMoveCompleted { get; set; }
 
         //Kallas på om en kung är utslagen
         public void gameOver(string gamestatus)
@@ -77,10 +86,10 @@ namespace Chess2._0
                 clickedSquare.ClearValue(Border.BorderBrushProperty);
                 
                 //Meddelar subscribers om att ett drag har gjorts
-                Action<int[]> change = onMoveCompleted;
+                Action<int[], Player> change = onMoveCompleted;
                 if (change != null)
                 {
-                    change(move);
+                        change(move, whitePlayer);
                 }
              }
 

@@ -83,14 +83,15 @@ namespace Chess2._0
             rules = new RulesEngine(board);
             window.setBoard(board.get());
             window.updateTable();
+            window.setPlayers(playerwhite, playerblack);
             gamestatus = "white";
+           
         }
 
         //Lyssnar efter gjorda drag i ui
-        public void onMoveCompleted (int[] newMove)
+        public void onMoveCompleted (int[] newMove, Player currentPlayer)
         {
-            if (playerwhite is HumanPlayer && gamestatus == "white" ||
-                playerblack is HumanPlayer && gamestatus == "black")
+            if (currentPlayer.Color == gamestatus)
             {
                 makeMove(newMove[0], newMove[1], newMove[2], newMove[3]);
             }
