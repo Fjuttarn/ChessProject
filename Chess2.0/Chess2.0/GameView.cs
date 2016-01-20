@@ -115,6 +115,7 @@ namespace Chess2._0
         //Kallas på efter att en player försöker göra ett drag för att se till att det är giltigt
         public void makeMove(int fromX, int fromY, int toX, int toY)
         {         
+            
             Move move = new Move(fromX, fromY, toX, toY);
 
             if (rules.isValid(move, gamestatus, board.get()))
@@ -163,7 +164,7 @@ namespace Chess2._0
 
         private void xmlwatcher(object source, FileSystemEventArgs e)
         {
-    
+            
             watcher.EnableRaisingEvents = false;
             board.setBoard(ds.LoadData());
             Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate
