@@ -14,7 +14,6 @@ namespace Chess2._0
   public class DataStorage
     {
         FileSystemWatcher watcher;
-        bool fileInUse = false;
 
         public DataStorage(FileSystemWatcher watch)
         {
@@ -24,9 +23,6 @@ namespace Chess2._0
         //Läser data från xml-fil, skapar en representation av schackbräädet och returnerar det.
         public ChessPiece[,] LoadData()
         {
-            /*            if (!fileInUse)
-                        {
-                            fileInUse = true;*/
             if (!IsFileLocked())
             {
    
@@ -74,19 +70,12 @@ namespace Chess2._0
                     }
                 }
 
-   //             fileInUse = false;
                 return board;
             }
             else
             {
                 throw new Exception();
-            }
-            /*       }
-                   else
-                   {
-                       LoadData();
-                   }
-                   return null;*/
+            }            
         }
         
 
@@ -94,11 +83,9 @@ namespace Chess2._0
         public void SaveData(ChessPiece[,] board)
         {
             watcher.EnableRaisingEvents = false;
-            if (!fileInUse)
+
+            if (!IsFileLocked())
             {
-
-                fileInUse = true;
-
                 ArrayList list = new ArrayList();
                 for (int x = 0; x < board.GetLength(0); x++)
                 {
@@ -131,14 +118,14 @@ namespace Chess2._0
                 xmlDoc.Save(@".\chessdata\chessdata.xml");
 
                 watcher.EnableRaisingEvents = true;
-                fileInUse = false;
             }
             else
             {
-                SaveData(board);
+                throw new Exception();
             }
         }
 
+        //Kollar om filen är låst 
         public bool IsFileLocked()
         {
             bool isLocked = true;
@@ -147,8 +134,15 @@ namespace Chess2._0
             {
                 try
                 {
-                    using (File.Open(@".\chessdata\chessdata.xml", FileMode.Open)) { }
-                    return false;
+                    if (File.Exists(@".\chessdata\chessdata.xml"))
+                    {
+                        using (File.Open(@".\chessdata\chessdata.xml", FileMode.Open)) { }
+                        return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 catch (IOException e)
                 {
