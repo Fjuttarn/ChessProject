@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Xml.Linq;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Chess2._0
 {
@@ -23,10 +24,15 @@ namespace Chess2._0
         //Läser data från xml-fil, skapar en representation av schackbräädet och returnerar det.
         public ChessPiece[,] LoadData()
         {
-            if (!fileInUse)
+            /*            if (!fileInUse)
+                        {
+                            fileInUse = true;*/
+            if (!IsFileLocked(@".\chessdata\chessdata.xml", 10))
             {
-                fileInUse = true;
-                ChessPiece[,] board = new ChessPiece[8, 8];
+   
+
+            ChessPiece[,] board = new ChessPiece[8, 8];
+
                 XDocument doc = XDocument.Load(@".\chessdata\chessdata.xml");
 
                 var data = from item in doc.Descendants("ChessPiece")
@@ -69,14 +75,19 @@ namespace Chess2._0
                     }
                 }
 
-                fileInUse = false;
+   //             fileInUse = false;
                 return board;
             }
             else
             {
-                LoadData();
+                throw new Exception();
             }
-            return null;
+            /*       }
+                   else
+                   {
+                       LoadData();
+                   }
+                   return null;*/
         }
         
 
@@ -127,6 +138,31 @@ namespace Chess2._0
             {
                 SaveData(board);
             }
+
+            
+        }
+
+        public bool IsFileLocked(string filePath, int secondsToWait)
+        {
+            bool isLocked = true;
+            int i = 0;
+            while (isLocked && ((i < secondsToWait) || (secondsToWait == 0)))
+            {
+                try
+                {
+                    using (File.Open(filePath, FileMode.Open)) { }
+                    return false;
+                }
+                catch (IOException e)
+                {
+                    var errorCode = Marshal.GetHRForException(e) & ((1 << 16) - 1);
+                    isLocked = errorCode == 32 || errorCode == 33;
+                    i++;
+                    if (secondsToWait != 0)
+                        new System.Threading.ManualResetEvent(false).WaitOne(1000);
+                }
+            }
+            return isLocked;
         }
 
         //Ta bort xml-filen
