@@ -24,8 +24,7 @@ namespace Chess2._0
         int[] move = new int[4];
         bool firstClick = true;
         Image[] piecesToUpdate = new Image[2];
-        Player whitePlayer;
-        Player blackPlayer;
+        List<Player> humanPlayers = new List<Player>();
 
         public MainWindow()
         {
@@ -33,10 +32,9 @@ namespace Chess2._0
             Chess chess = new Chess(this);
         }
 
-        public void setPlayers(Player white, Player black)
+        public void setPlayers(List<Player> players)
         {
-            whitePlayer = white;
-            blackPlayer = black;
+            humanPlayers = players;
         }
            
 
@@ -89,7 +87,14 @@ namespace Chess2._0
                 Action<int[], Player> change = onMoveCompleted;
                 if (change != null)
                 {
-                        change(move, whitePlayer);
+                        foreach (Player p in humanPlayers)
+                        {
+                            if (p.isPlayersTurn)
+                            {
+                                change(move, p);
+                            }
+                        }
+               
                 }
              }
 

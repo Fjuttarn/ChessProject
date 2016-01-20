@@ -56,6 +56,7 @@ namespace Chess2._0
             }
 
             board = new ChessBoard(ds);
+            List<Player> players = new List<Player>();
 
             if (gamemode == "singleplayer")
             {
@@ -65,12 +66,14 @@ namespace Chess2._0
                         playerwhite = new HumanPlayer("white");
                         playerblack = new CPUPlayer("black");
                         playerblack.setupAI(board, this);
+                        players.Add(playerwhite);
                         break;
 
                     case "black":
                         playerwhite = new CPUPlayer("white");
                         playerblack = new HumanPlayer("black");
                         playerwhite.setupAI(board, this);
+                        players.Add(playerblack);
                         break;
                 }             
             }
@@ -78,12 +81,16 @@ namespace Chess2._0
             {
                 playerwhite = new HumanPlayer("white");
                 playerblack = new HumanPlayer("black");
+                players.Add(playerwhite);
+                players.Add(playerblack);
             }
  
             rules = new RulesEngine(board);
             window.setBoard(board.get());
             window.updateTable();
-            window.setPlayers(playerwhite, playerblack);
+            window.setPlayers(players);
+            playerwhite.isPlayersTurn = true;
+            playerblack.isPlayersTurn = false;
             gamestatus = "white";
            
         }
@@ -133,10 +140,14 @@ namespace Chess2._0
             if(gamestatus.Equals("white"))
             {
                 gamestatus = "black";
+                playerwhite.isPlayersTurn = false;
+                playerblack.isPlayersTurn = true;
             }
             else if(gamestatus.Equals("black"))
             {
                 gamestatus = "white";
+                playerwhite.isPlayersTurn = true;
+                playerblack.isPlayersTurn = false;
             }
         }
 

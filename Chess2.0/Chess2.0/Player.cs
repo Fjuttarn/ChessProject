@@ -10,6 +10,8 @@ namespace Chess2._0
     {
         private string color;
 
+        private bool playersTurn;
+
         public Player(String color)
         {
             this.color = color;
@@ -20,6 +22,18 @@ namespace Chess2._0
             get
             {
                 return color;
+            }
+        }
+
+        public bool isPlayersTurn
+        {
+            get
+            {
+                return playersTurn;
+            }
+            set
+            {
+                playersTurn = value;
             }
         }
 
