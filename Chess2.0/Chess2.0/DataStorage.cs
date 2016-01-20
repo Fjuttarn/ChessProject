@@ -27,10 +27,9 @@ namespace Chess2._0
             /*            if (!fileInUse)
                         {
                             fileInUse = true;*/
-            if (!IsFileLocked(@".\chessdata\chessdata.xml", 10))
+            if (!IsFileLocked())
             {
    
-
             ChessPiece[,] board = new ChessPiece[8, 8];
 
                 XDocument doc = XDocument.Load(@".\chessdata\chessdata.xml");
@@ -138,28 +137,23 @@ namespace Chess2._0
             {
                 SaveData(board);
             }
-
-            
         }
 
-        public bool IsFileLocked(string filePath, int secondsToWait)
+        public bool IsFileLocked()
         {
             bool isLocked = true;
             int i = 0;
-            while (isLocked && ((i < secondsToWait) || (secondsToWait == 0)))
+            while (isLocked || i < 10)
             {
                 try
                 {
-                    using (File.Open(filePath, FileMode.Open)) { }
+                    using (File.Open(@".\chessdata\chessdata.xml", FileMode.Open)) { }
                     return false;
                 }
                 catch (IOException e)
                 {
-                    var errorCode = Marshal.GetHRForException(e) & ((1 << 16) - 1);
-                    isLocked = errorCode == 32 || errorCode == 33;
                     i++;
-                    if (secondsToWait != 0)
-                        new System.Threading.ManualResetEvent(false).WaitOne(1000);
+                    new System.Threading.ManualResetEvent(false).WaitOne(1000);
                 }
             }
             return isLocked;
